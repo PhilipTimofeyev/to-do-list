@@ -9,8 +9,10 @@ const addTaskBtn = document.getElementById('addTaskBtn')
 
 // Event Listeners
 	addTaskBtn.addEventListener("click", function() {
-		let newTask = tasks.addTask("Hello", "I am a task");
+		let listSize = tasks.list.length + 1
+		let newTask = tasks.addTask("Hello", "I am a task", listSize);
 		displayNewTask(newTask)
+		console.log(newTask.id)
 	});
 
 // 
@@ -44,6 +46,7 @@ function displayAllTasks() {
 	})
 }
 
+// Misc Functions (Add to sepearte module)
 
 displayAllTasks()
 

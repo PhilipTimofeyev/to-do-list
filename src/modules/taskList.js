@@ -1,14 +1,12 @@
 import {Task} from "./task.js"
 
-// let x = new Task("First Task", "Task Description")
-
 class Tasks {
 	constructor() {
-		this.list = [new Task("First Task", "Task Description"), new Task("Second Task", "Task Description")]
+		this.list = [new Task("First Task", "Task Description", 1), new Task("Second Task", "Task Description", 2)]
 	}
 
-	addTask(title, description) {
-		let newTask = new Task(title, description)
+	addTask(title, description, id) {
+		let newTask = new Task(title, description, id)
 		this.list.push(newTask)
 		return newTask
 	}
