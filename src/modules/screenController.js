@@ -1,5 +1,6 @@
-import {taskList} from "./taskList.js"
+import {tasks} from "./taskList.js"
 
+// DOM Elements
 const taskContainer = document.getElementById('tasks-container')
 
 // Buttons
@@ -8,8 +9,8 @@ const addTaskBtn = document.getElementById('addTaskBtn')
 
 // Event Listeners
 	addTaskBtn.addEventListener("click", function() {
-		taskList.addTask("Hello", "I am a task");
-		showContent()
+		let newTask = tasks.addTask("Hello", "I am a task");
+		displayNewTask(newTask)
 	});
 
 // 
@@ -17,21 +18,33 @@ const addTaskBtn = document.getElementById('addTaskBtn')
 function displayApp() {
 }
 
-function showContent() {
-  let temp = document.getElementById("task-template");
-  let clon = temp.content.cloneNode(true);
+function displayNewTask(task) {
+  	let temp = document.getElementById("task-template");
+  	let taskTemp = temp.content.cloneNode(true);
 
-  let title = clon.getElementById('task-title')
-  let description = clon.getElementById('task-description')
+  	let title = taskTemp.getElementById('task-title')
+  	let description = taskTemp.getElementById('task-description')
 
-  console.log(description)
+  	title.innerText = task.title
+  	description.innerText = task.description
+  	taskContainer.appendChild(taskTemp);
+}
 
-  title.innerText = taskList.list[0].title
-  description.innerText = taskList.list[0].description
-  taskContainer.appendChild(clon);
+function displayAllTasks() {
+	tasks.list.forEach((task) => {
+  	let temp = document.getElementById("task-template");
+  	let taskTemp = temp.content.cloneNode(true);
+
+  	let title = taskTemp.getElementById('task-title')
+  	let description = taskTemp.getElementById('task-description')
+
+  	title.innerText = task.title
+  	description.innerText = task.description
+  	taskContainer.appendChild(taskTemp);
+	})
 }
 
 
-
+displayAllTasks()
 
 export {displayApp};
