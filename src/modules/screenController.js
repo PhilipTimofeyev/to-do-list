@@ -1,7 +1,9 @@
 import {taskList} from "./taskList.js"
 
 function displayApp() {
-	// console.log("Success")
+	console.log(taskList.list)
+	taskList.addTask("Hello")
+	console.log(taskList.list)
 }
 
 

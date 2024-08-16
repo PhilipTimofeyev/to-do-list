@@ -1,10 +1,5 @@
-function task() {
-	console.log("Success")
+export class Task {
+	constructor(title) {
+		this.title = title	
+	}
 }
-
-
-
-
-
-
-export {task};
