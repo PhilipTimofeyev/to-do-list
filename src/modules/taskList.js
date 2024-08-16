@@ -5,8 +5,8 @@ class TaskList {
 		this.list = []
 	}
 
-	addTask() {
-		let newTask = new Task("Hello")
+	addTask(title, description) {
+		let newTask = new Task(title, description)
 		this.list.push(newTask)
 	}
 }

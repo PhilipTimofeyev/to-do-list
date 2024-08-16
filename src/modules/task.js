@@ -1,5 +1,6 @@
 export class Task {
-	constructor(title) {
-		this.title = title	
+	constructor(title, description) {
+		this.title = title;
+		this.description = description;
 	}
 }
