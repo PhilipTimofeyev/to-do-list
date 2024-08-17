@@ -6,16 +6,6 @@ const taskContainer = document.getElementById('tasks-container')
 // Buttons
 const addTaskBtn = document.getElementById('addTaskBtn')
 
-// Event Listeners
-addTaskBtn.addEventListener("click", function() {
-	let listSize = tasks.list.length + 1
-	let newTask = tasks.addTask("Hello", "I am a task", listSize);
-	displayNewTask(newTask)
-});
-
-
-// 
-
 function displayApp() {
 }
 
@@ -41,10 +31,12 @@ function displayAllTasks() {
 	function setupTemplate(task) {
 		let temp = document.getElementById("task-template");
 		let taskTemp = temp.content.cloneNode(true);
+		let deleteTaskBtn = taskTemp.getElementById('deleteTaskBtn')
 
 		let title = taskTemp.getElementById('task-title')
 		let description = taskTemp.getElementById('task-description')
-		let deleteTaskBtn = taskTemp.getElementById('deleteTaskBtn')
+		let date = taskTemp.getElementById('task-date')
+
 
 		deleteTaskBtn.addEventListener("click", function() {
 			tasks.deleteTask(task.id)
@@ -55,11 +47,42 @@ function displayAllTasks() {
 
 		title.innerText = task.title
 		description.innerText = task.description
+		date.innerText = task.date.toDateString()
 
 		return taskTemp
 	}
 
-// 
+
+// Extract to Modal Form Module
+
+const showButton = document.getElementById("showDialog");
+const taskForm = document.getElementById("taskForm");
+const outputBox = document.querySelector("output");
+const selectFormInputs = taskForm.querySelectorAll(".formInput");
+const confirmBtn = taskForm.querySelector("#confirmBtn");
+
+addTaskBtn.addEventListener("click", () => {
+  taskForm.showModal();
+});
+
+taskForm.addEventListener("close", (e) => {
+	const responseArr = Array.from(selectFormInputs).map((el) => {
+		if (el.valueAsDate) {
+			return el.valueAsDate
+		}
+		return el.value
+	})
+
+	let listSize = tasks.list.length + 1
+	let newTask = tasks.addTask(...responseArr, listSize);
+	displayNewTask(newTask)
+
+});
+
+confirmBtn.addEventListener("click", (event) => {
+  event.preventDefault();
+  taskForm.close(selectFormInputs.value); 
+});
 
 displayAllTasks()
 

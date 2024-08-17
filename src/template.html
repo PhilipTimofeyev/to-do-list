@@ -14,8 +14,36 @@
 				<button id="deleteTaskBtn">Delete Task</button>
 			  <h2 id='task-title'>Title</h2>
 			  <h2 id='task-description'> Description </h2>
+			  <h2 id='task-date'> Date </h2>
 			</div>
 		</template>
 	</div>
+	<dialog id="taskForm">
+	  <form>
+	    <p>
+	      <label>
+	        Title:
+        <input type="text" class="formInput">	
+	      </label>
+	    </p>
+	    <p>
+	      <label>
+	        Description:
+        <input type="text" class="formInput">	
+	      </label>
+	    </p>
+	    <p>
+	      <label>
+	        Title:
+        <input type="date" class="formInput">	
+	      </label>
+	    </p>
+	    <div>
+	      <button value="cancel" formmethod="dialog">Cancel</button>
+	      <button id="confirmBtn" value="default">Confirm</button>
+	    </div>
+	  </form>
+	</dialog>
 </body>
 </html>
+
