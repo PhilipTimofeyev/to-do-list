@@ -6,8 +6,6 @@ const taskContainer = document.getElementById('tasks-container')
 // Buttons
 const addTaskBtn = document.getElementById('addTaskBtn')
 
-
-console.log(addTaskBtn)
 // Event Listeners
 addTaskBtn.addEventListener("click", function() {
 	let listSize = tasks.list.length + 1
@@ -22,46 +20,14 @@ function displayApp() {
 }
 
 function displayNewTask(task) {
-  	let temp = document.getElementById("task-template");
-  	let taskTemp = temp.content.cloneNode(true);
-
-  	let title = taskTemp.getElementById('task-title')
-  	let description = taskTemp.getElementById('task-description')
-  	let deleteTaskBtn = taskTemp.getElementById('deleteTaskBtn')
-
-  	deleteTaskBtn.addEventListener("click", function() {
-  		tasks.deleteTask(task.id)
-  		removeTask(task.id)
-  	});
-
-  	taskTemp.firstElementChild.setAttribute('data-id', task.id)
-
-  	title.innerText = task.title
-  	description.innerText = task.description
-  	taskContainer.appendChild(taskTemp);
+  	const newTaskElement = setupTemplate(task)
+  	taskContainer.appendChild(newTaskElement);
 }
 
 function displayAllTasks() {
 	tasks.list.forEach((task) => {
-  	let temp = document.getElementById("task-template");
-  	let taskTemp = temp.content.cloneNode(true);
-
-  	let deleteTaskBtn = taskTemp.getElementById('deleteTaskBtn')
-
-  	deleteTaskBtn.addEventListener("click", function() {
-  		tasks.deleteTask(task.id)
-  		removeTask(task.id)
-  		console.log(tasks.list)
-  	});
-
-  	taskTemp.firstElementChild.setAttribute('data-id', task.id)
-
-  	let title = taskTemp.getElementById('task-title')
-  	let description = taskTemp.getElementById('task-description')
-
-  	title.innerText = task.title
-  	description.innerText = task.description
-  	taskContainer.appendChild(taskTemp);
+  	const newTaskElement = setupTemplate(task)
+  	taskContainer.appendChild(newTaskElement);
 	})
 }
 
@@ -70,6 +36,27 @@ function displayAllTasks() {
 	function removeTask(id) {
 		let taskToDelete = document.querySelector(`[data-id="${id}"]`)
 		taskToDelete.remove()
+	}
+
+	function setupTemplate(task) {
+		let temp = document.getElementById("task-template");
+		let taskTemp = temp.content.cloneNode(true);
+
+		let title = taskTemp.getElementById('task-title')
+		let description = taskTemp.getElementById('task-description')
+		let deleteTaskBtn = taskTemp.getElementById('deleteTaskBtn')
+
+		deleteTaskBtn.addEventListener("click", function() {
+			tasks.deleteTask(task.id)
+			removeTask(task.id)
+		});
+
+		taskTemp.firstElementChild.setAttribute('data-id', task.id)
+
+		title.innerText = task.title
+		description.innerText = task.description
+
+		return taskTemp
 	}
 
 // 
