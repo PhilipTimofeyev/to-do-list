@@ -1,9 +1,5 @@
 import {tasks} from "./taskList.js"
 
-// console.log(tasks.list[0].updateTask("lol", "yes"))
-
-// console.log(tasks)
-
 // DOM Elements
 const taskContainer = document.getElementById('tasks-container')
 
@@ -21,11 +17,7 @@ function displayNewTask(task) {
 function displayUpdatedTask(task) {
   	const oldTaskElement = document.querySelector(`[data-id="${taskForm.dataset.taskId}"]`)
   	const newTaskElement = setupTemplate(task)
-  	console.log(task.date)
-  	// console.log(oldTaskElement)
-  	// console.log(newTaskElement)
   	taskContainer.replaceChild(newTaskElement, oldTaskElement);
-  	// taskContainer.appendChild(newTaskElement);
 }
 
 function displayAllTasks() {
@@ -43,6 +35,7 @@ function removeTaskElement(id) {
 }
 
 function setupTemplate(task) {
+	console.log(task)
 	let temp = document.getElementById("task-template");
 	let taskTemp = temp.content.cloneNode(true);
 	let deleteTaskBtn = taskTemp.getElementById('deleteTaskBtn')
@@ -51,6 +44,7 @@ function setupTemplate(task) {
 	let title = taskTemp.getElementById('task-title')
 	let description = taskTemp.getElementById('task-description')
 	let date = taskTemp.getElementById('task-date')
+	let priority = taskTemp.getElementById('task-priority')
 
 
 	deleteTaskBtn.addEventListener("click", function() {
@@ -70,6 +64,7 @@ function setupTemplate(task) {
 	title.innerText = task.title
 	description.innerText = task.description
 	date.innerText = task.date.toDateString()
+	priority.innerText = task.priority
 
 	return taskTemp
 }
@@ -93,10 +88,7 @@ function modalAddTask(responseArr) {
 function modalUpdateTask(responseArr, taskForm) {
 	const task = tasks.findTask(taskForm.dataset.taskId)
 	task.updateTask(...responseArr)
-	// console.log(task)
 	displayUpdatedTask(task) 
-
-	// console.log(responseArr)
 }
 
 
@@ -105,6 +97,7 @@ function modalUpdateTask(responseArr, taskForm) {
 const taskForm = document.getElementById("taskForm");
 const selectFormInputs = taskForm.querySelectorAll(".formInput");
 const confirmBtn = taskForm.querySelector("#confirmBtn");
+const cancelButton = document.getElementById("cancelBtn");
 
 addTaskBtn.addEventListener("click", () => {
 	taskForm.dataset.action = "add"
@@ -112,7 +105,7 @@ addTaskBtn.addEventListener("click", () => {
 });
 
 taskForm.addEventListener("close", (e) => {
-	// console.log(taskForm.dataset.taskId)
+	const cancelButton = document.getElementById("cancelBtn");
 	const responseArr = Array.from(selectFormInputs).map((el) => {
 		if (el.valueAsDate) {
 			return el.valueAsDate
@@ -120,20 +113,27 @@ taskForm.addEventListener("close", (e) => {
 		return el.value
 	})
 
+	console.log(responseArr)
+
 	if (taskForm.dataset.action === 'add') {
 		modalAddTask(responseArr)
 	} else {
 		modalUpdateTask(responseArr, taskForm)
-		console.log(responseArr)
 	}
 
 });
 
 confirmBtn.addEventListener("click", (event) => {
   event.preventDefault();
-  // console.log(taskForm)
   taskForm.close(); 
 });
+
+// Form cancel button closes the dialog box
+// cancelButton.addEventListener("click", () => {
+// 	// console.log("LOL")
+// 	event.preventDefault();
+// 	taskForm.close(); 
+// });
 
 displayAllTasks()
 

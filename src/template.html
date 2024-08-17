@@ -13,13 +13,16 @@
 			<div>
 				<button id="deleteTaskBtn">Delete Task</button>
 				<button id="updateTaskBtn">Update Task</button>
+				<div>
 			  <h2 id='task-title'>Title</h2>
 			  <h2 id='task-description'> Description </h2>
 			  <h2 id='task-date'> Date </h2>
+			  <h2 id='task-priority'> Priority </h2>
+			</div>
 			</div>
 		</template>
 	</div>
-	<dialog id="taskForm" data-action='add' data-task-id='0'>
+	<dialog id="taskForm" data-action='add' data-taskId='0'>
 	  <form>
 	    <p>
 	      <label>
@@ -39,6 +42,15 @@
         <input type="date" class="formInput">	
 	      </label>
 	    </p>
+	    <p>
+	    <label for="taskPriority">Priority:</label>
+        <select id="taskPriority" name="taskPriority" class="formInput">
+          <option></option>
+          <option>Low</option>
+          <option>Medium</option>
+          <option>High</option>
+        </select>
+      </p>
 	    <div>
 	      <button value="cancel" formmethod="dialog">Cancel</button>
 	      <button id="confirmBtn" value="default">Confirm</button>
