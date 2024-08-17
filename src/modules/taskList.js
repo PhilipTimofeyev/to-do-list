@@ -10,6 +10,10 @@ class Tasks {
 		this.list.push(newTask)
 		return newTask
 	}
+
+	deleteTask(id) {
+		this.list = this.list.filter((task) => task.id != id)
+	}
 }
 
 
