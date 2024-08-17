@@ -21,43 +21,52 @@ function displayAllTasks() {
 	})
 }
 
-// Misc Functions (Add to sepearte module)
+// Misc Functions (Add to seperate module)
 	
-	function removeTask(id) {
-		let taskToDelete = document.querySelector(`[data-id="${id}"]`)
-		taskToDelete.remove()
-	}
+function removeTask(id) {
+	let taskToDelete = document.querySelector(`[data-id="${id}"]`)
+	taskToDelete.remove()
+}
 
-	function setupTemplate(task) {
-		let temp = document.getElementById("task-template");
-		let taskTemp = temp.content.cloneNode(true);
-		let deleteTaskBtn = taskTemp.getElementById('deleteTaskBtn')
+function setupTemplate(task) {
+	let temp = document.getElementById("task-template");
+	let taskTemp = temp.content.cloneNode(true);
+	let deleteTaskBtn = taskTemp.getElementById('deleteTaskBtn')
 
-		let title = taskTemp.getElementById('task-title')
-		let description = taskTemp.getElementById('task-description')
-		let date = taskTemp.getElementById('task-date')
+	let title = taskTemp.getElementById('task-title')
+	let description = taskTemp.getElementById('task-description')
+	let date = taskTemp.getElementById('task-date')
 
 
-		deleteTaskBtn.addEventListener("click", function() {
-			tasks.deleteTask(task.id)
-			removeTask(task.id)
-		});
+	deleteTaskBtn.addEventListener("click", function() {
+		tasks.deleteTask(task.id)
+		removeTask(task.id)
+		resetTaskIds() 
+	});
 
-		taskTemp.firstElementChild.setAttribute('data-id', task.id)
+	taskTemp.firstElementChild.setAttribute('data-id', task.id)
 
-		title.innerText = task.title
-		description.innerText = task.description
-		date.innerText = task.date.toDateString()
+	title.innerText = task.title
+	description.innerText = task.description
+	date.innerText = task.date.toDateString()
 
-		return taskTemp
-	}
+	return taskTemp
+}
+
+function resetTaskIds() {
+	tasks.list.forEach((task, idx) => {
+		const newId = idx + 1
+		let taskToDelete = document.querySelector(`[data-id="${task.id}"]`)
+		taskToDelete.setAttribute('data-id', newId)
+		task.id = newId
+	})
+}
 
 
 // Extract to Modal Form Module
 
 const showButton = document.getElementById("showDialog");
 const taskForm = document.getElementById("taskForm");
-const outputBox = document.querySelector("output");
 const selectFormInputs = taskForm.querySelectorAll(".formInput");
 const confirmBtn = taskForm.querySelector("#confirmBtn");
 
