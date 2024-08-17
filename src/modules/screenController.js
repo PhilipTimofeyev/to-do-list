@@ -11,6 +11,7 @@ function displayApp() {
 
 function displayNewTask(task) {
   	const newTaskElement = setupTemplate(task)
+  	console.log(newTaskElement)
   	taskContainer.appendChild(newTaskElement);
 }
 
@@ -35,7 +36,6 @@ function removeTaskElement(id) {
 }
 
 function setupTemplate(task) {
-	console.log(task)
 	let temp = document.getElementById("task-template");
 	let taskTemp = temp.content.cloneNode(true);
 	let deleteTaskBtn = taskTemp.getElementById('deleteTaskBtn')
@@ -83,6 +83,7 @@ function modalAddTask(responseArr) {
 	let listSize = tasks.list.length + 1
 	let newTask = tasks.addTask(...responseArr, listSize);
 	displayNewTask(newTask)
+	// console.log(tasks)
 }
 
 function modalUpdateTask(responseArr, taskForm) {
@@ -104,36 +105,24 @@ addTaskBtn.addEventListener("click", () => {
   taskForm.showModal();
 });
 
-taskForm.addEventListener("close", (e) => {
-	const cancelButton = document.getElementById("cancelBtn");
-	const responseArr = Array.from(selectFormInputs).map((el) => {
-		if (el.valueAsDate) {
-			return el.valueAsDate
-		}
-		return el.value
-	})
-
-	console.log(responseArr)
-
-	if (taskForm.dataset.action === 'add') {
-		modalAddTask(responseArr)
-	} else {
-		modalUpdateTask(responseArr, taskForm)
-	}
-
-});
-
 confirmBtn.addEventListener("click", (event) => {
+  const responseArr = Array.from(selectFormInputs).map((el) => {
+  	if (el.valueAsDate) {
+  		return el.valueAsDate
+  	}
+  	return el.value
+  })
+
+  if (taskForm.dataset.action === 'add') {
+  	modalAddTask(responseArr)
+  } else {
+  	modalUpdateTask(responseArr, taskForm)
+  }
   event.preventDefault();
   taskForm.close(); 
+
 });
 
-// Form cancel button closes the dialog box
-// cancelButton.addEventListener("click", () => {
-// 	// console.log("LOL")
-// 	event.preventDefault();
-// 	taskForm.close(); 
-// });
 
 displayAllTasks()
 
