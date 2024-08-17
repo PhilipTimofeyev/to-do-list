@@ -14,6 +14,10 @@ class Tasks {
 	deleteTask(id) {
 		this.list = this.list.filter((task) => task.id != id)
 	}
+
+	findTask(id) {
+		return this.list.find((task) => task.id == id)
+	}
 }
 
 

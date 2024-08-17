@@ -12,13 +12,14 @@
 		<template id="task-template">
 			<div>
 				<button id="deleteTaskBtn">Delete Task</button>
+				<button id="updateTaskBtn">Update Task</button>
 			  <h2 id='task-title'>Title</h2>
 			  <h2 id='task-description'> Description </h2>
 			  <h2 id='task-date'> Date </h2>
 			</div>
 		</template>
 	</div>
-	<dialog id="taskForm">
+	<dialog id="taskForm" data-action='add' data-task-id='0'>
 	  <form>
 	    <p>
 	      <label>

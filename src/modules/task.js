@@ -5,4 +5,10 @@ export class Task {
 		this.date = date;
 		this.id = id;
 	}
+
+	updateTask(newTitle, newDescription, newDate) {
+		this.title = newTitle
+		this.description = newDescription
+		this.date = newDate
+	}
 }
