@@ -11,14 +11,14 @@
 		<button id="addTaskBtn">Add Task</button>
 		<template id="task-template">
 			<div>
-				<button id="deleteTaskBtn">Delete Task</button>
-				<button id="updateTaskBtn">Update Task</button>
 				<div>
 			  <h2 id='task-title'>Title</h2>
 			  <h2 id='task-description'> Description </h2>
 			  <h2 id='task-date'> Date </h2>
 			  <h2 id='task-priority'> Priority </h2>
 			</div>
+			<button id="deleteTaskBtn">Delete Task</button>
+			<button id="updateTaskBtn">Update Task</button>
 			</div>
 		</template>
 	</div>
@@ -27,24 +27,24 @@
 	    <p>
 	      <label>
 	        Title:
-        <input type="text" class="formInput">	
+        <input type="text" class="formInput" name="title">	
 	      </label>
 	    </p>
 	    <p>
 	      <label>
 	        Description:
-        <input type="text" class="formInput">	
+        <input type="text" class="formInput" name="description">	
 	      </label>
 	    </p>
 	    <p>
 	      <label>
-	        Title:
-        <input type="date" class="formInput">	
+	        Date:
+        <input type="date" class="formInput" name="date" id='date'>	
 	      </label>
 	    </p>
 	    <p>
 	    <label for="taskPriority">Priority:</label>
-        <select id="taskPriority" name="taskPriority" class="formInput">
+        <select id="taskPriority" name="priority" class="formInput">
           <option></option>
           <option>Low</option>
           <option>Medium</option>

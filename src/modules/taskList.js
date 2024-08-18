@@ -2,7 +2,7 @@ import {Task} from "./task.js"
 
 class Tasks {
 	constructor() {
-		this.list = [new Task("First Task", "Task Description", new Date("2/1/22"), "high", 1), new Task("Second Task", "Task Description", new Date("3/1/23"), "low", 2)]
+		this.list = [new Task("First Task", "Task Description", new Date("2/1/22"), "High", 1), new Task("Second Task", "Task Description", new Date("3/1/23"), "Low", 2)]
 	}
 
 	addTask(title, description, date, priority, id) {

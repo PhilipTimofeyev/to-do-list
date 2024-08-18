@@ -56,6 +56,7 @@ function setupTemplate(task) {
 	updateTaskBtn.addEventListener("click", function() {
 		taskForm.dataset.action = "update";
 		taskForm.dataset.taskId = task.id;
+		fillForm(task.id); 
 		taskForm.showModal();
 	});
 
@@ -67,6 +68,23 @@ function setupTemplate(task) {
 	priority.innerText = task.priority
 
 	return taskTemp
+}
+
+function fillForm(taskId) {
+	const task = tasks.findTask(taskId)
+
+	const form = document.querySelectorAll(".formInput")
+	const formDate = document.getElementById("date")
+
+	form.forEach((input) => {
+		let attribute = input.name
+		
+		input.name === 'date' ? input.value = parseDate(task.date) : input.value = task[attribute]
+	})
+}
+
+function parseDate(date) {
+	return date.getFullYear().toString().padStart(4, '0') + '-' + (date.getMonth()+1).toString().padStart(2, '0') + '-' + date.getDate().toString().padStart(2, '0');
 }
 
 function resetTaskIds() {
@@ -122,7 +140,6 @@ confirmBtn.addEventListener("click", (event) => {
   taskForm.close(); 
 
 });
-
 
 displayAllTasks()
 
