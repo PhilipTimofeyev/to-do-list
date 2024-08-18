@@ -11,7 +11,6 @@ function displayApp() {
 
 function displayNewTask(task) {
   	const newTaskElement = setupTemplate(task)
-  	console.log(newTaskElement)
   	taskContainer.appendChild(newTaskElement);
 }
 
@@ -64,7 +63,7 @@ function setupTemplate(task) {
 
 	title.innerText = task.title
 	description.innerText = task.description
-	date.innerText = task.date.toDateString()
+	date.innerText = task.date
 	priority.innerText = task.priority
 
 	return taskTemp
@@ -84,6 +83,7 @@ function fillForm(taskId) {
 }
 
 function parseDate(date) {
+	if (date === "") return null
 	return date.getFullYear().toString().padStart(4, '0') + '-' + (date.getMonth()+1).toString().padStart(2, '0') + '-' + date.getDate().toString().padStart(2, '0');
 }
 
@@ -101,7 +101,6 @@ function modalAddTask(responseArr) {
 	let listSize = tasks.list.length + 1
 	let newTask = tasks.addTask(...responseArr, listSize);
 	displayNewTask(newTask)
-	// console.log(tasks)
 }
 
 function modalUpdateTask(responseArr, taskForm) {
@@ -126,7 +125,7 @@ addTaskBtn.addEventListener("click", () => {
 confirmBtn.addEventListener("click", (event) => {
   const responseArr = Array.from(selectFormInputs).map((el) => {
   	if (el.valueAsDate) {
-  		return el.valueAsDate
+  		return new Date(el.value)
   	}
   	return el.value
   })
