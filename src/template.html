@@ -23,11 +23,11 @@
 		</template>
 	</div>
 	<dialog id="taskForm" data-action='add' data-taskId='0'>
-	  <form>
+	  <form id='form'>
 	    <p>
 	      <label>
 	        Title:
-        <input type="text" class="formInput" name="title">	
+        <input type="text" class="formInput" name="title" required>	
 	      </label>
 	    </p>
 	    <p>
@@ -52,7 +52,7 @@
         </select>
       </p>
 	    <div>
-	      <button value="cancel" formmethod="dialog">Cancel</button>
+	      <button id="cancelBtn" value="cancel" formmethod="dialog">Cancel</button>
 	      <button id="confirmBtn" value="default">Confirm</button>
 	    </div>
 	  </form>

@@ -117,6 +117,7 @@ function modalUpdateTask(responseArr, taskForm) {
 // Extract to Modal Form Module
 
 const taskForm = document.getElementById("taskForm");
+const form = document.getElementById("form");
 const selectFormInputs = taskForm.querySelectorAll(".formInput");
 const confirmBtn = taskForm.querySelector("#confirmBtn");
 const cancelButton = document.getElementById("cancelBtn");
@@ -128,6 +129,7 @@ addTaskBtn.addEventListener("click", () => {
 });
 
 confirmBtn.addEventListener("click", (event) => {
+	if (!form.reportValidity()) return
   const responseArr = Array.from(selectFormInputs).map((el) => {
   	if (el.valueAsDate) {
   		return new Date(el.value)
@@ -144,6 +146,10 @@ confirmBtn.addEventListener("click", (event) => {
   taskForm.close(); 
 
 });
+
+cancelButton.addEventListener("click", (event) => {
+	taskForm.close(); 
+})
 
 displayAllTasks()
 
