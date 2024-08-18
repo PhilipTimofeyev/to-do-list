@@ -71,15 +71,19 @@ function setupTemplate(task) {
 
 function fillForm(taskId) {
 	const task = tasks.findTask(taskId)
-
 	const form = document.querySelectorAll(".formInput")
-	const formDate = document.getElementById("date")
 
 	form.forEach((input) => {
 		let attribute = input.name
 		
 		input.name === 'date' ? input.value = parseDate(task.date) : input.value = task[attribute]
 	})
+}
+
+function clearForm() {
+	const form = document.querySelectorAll(".formInput")
+
+	form.forEach((input) => input.value = "")
 }
 
 function parseDate(date) {
@@ -118,7 +122,8 @@ const confirmBtn = taskForm.querySelector("#confirmBtn");
 const cancelButton = document.getElementById("cancelBtn");
 
 addTaskBtn.addEventListener("click", () => {
-	taskForm.dataset.action = "add"
+	taskForm.dataset.action = "add";
+	clearForm()
   taskForm.showModal();
 });
 
