@@ -11,6 +11,10 @@ nav {
 
 }
 
+nav h3 {
+	text-align: center;
+}
+
 .main-container {
 	display: flex;
 	gap: 15vw

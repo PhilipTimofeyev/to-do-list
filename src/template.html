@@ -9,19 +9,17 @@
 	<h1> To-Do App </h1>
 	<div class='main-container'>
 	<nav> 
-		Navigation
-			<div id="projects-container">
+		<h3> Projects </h3>
+			<ul id="projects-container">
 				<button id="addProjectBtn">Add Project</button>
 				<template id="project-template">
-					<div>
-						<div>
+					<li>
 					  <h2 id='project-name'>Title</h2>
-					</div>
-					<button id="showProjectBtn">Show Project</button>
-					<button id="deleteProjectBtn">Delete Project</button>
-					</div>
+						<button id="showProjectBtn">Show Project</button>
+						<button id="deleteProjectBtn">Delete Project</button>
+					</li>
 				</template>
-			</div>
+			</ul>
 	</nav>
 	<div id="tasks-container">
 		<button id="addTaskBtn">Add Task</button>
