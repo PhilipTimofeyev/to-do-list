@@ -45,22 +45,22 @@ function modalAddProject(projectName) {
 	displayNewProject(newProject)
 }
 
-let projectName
 
-const projectTitleInput = document.getElementById("projectTitleInput");
+(function addProject() {
+	const projectTitleInput = document.getElementById("projectTitleInput");
+	let projectName
 
-projectTitleInput.addEventListener("input", updateValue);
-function updateValue(e) {
-  projectName = e.target.value;
-}
+	projectTitleInput.addEventListener("input", updateValue);
 
+	function updateValue(e) {
+	  projectName = e.target.value;
+	}
 
-addProjectBtn.addEventListener('click', function() {
-	console.log(projectName)
-	modalAddProject(projectName)
-})
-
-// projectTitleInput.addEventListener("input", updateValue);
+	addProjectBtn.addEventListener('click', function() {
+		let titleValidity = projectTitleInput.checkValidity()
+		if (titleValidity) {modalAddProject(projectName)}
+	})
+})()
 
 function resetProjectIds() {
 	projects.list.forEach((project, idx) => {
