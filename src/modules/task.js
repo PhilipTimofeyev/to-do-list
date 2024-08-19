@@ -14,11 +14,6 @@ export class Task {
 		this.date = newDate;
 		this.priority = newPriority;
 	}
-
-	toggleCompleted() {
-		// console.log(this.complete)
-		this.complete = this.complete === false ? true : false
-	}
 }
 
 export function resetTaskIds(project) {

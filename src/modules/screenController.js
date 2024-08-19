@@ -134,18 +134,15 @@ function setupTaskTemplate(task, project) {
 	let taskTemp = temp.content.cloneNode(true);
 	let deleteTaskBtn = taskTemp.getElementById('deleteTaskBtn')
 	let updateTaskBtn = taskTemp.getElementById('updateTaskBtn')
-	let completedBtn = taskTemp.getElementById('completedBtn')
+	let taskCheckbox = taskTemp.getElementById('taskCheckbox')
 
 	let title = taskTemp.getElementById('task-title')
 	let description = taskTemp.getElementById('task-description')
 	let date = taskTemp.getElementById('task-date')
 	let priority = taskTemp.getElementById('task-priority')
 
-
-	completedBtn.addEventListener("click", function() {
-		task.toggleCompleted()
-		completedBtn.innerText = completedBtn.innerText === 'To Do' ? 'Done' : `To Do`;
-		console.log(task)
+	taskCheckbox.addEventListener("change", function() {
+		task.complete = taskCheckbox.checked
 	});
 
 	deleteTaskBtn.addEventListener("click", function() {
