@@ -56,9 +56,16 @@ function modalAddProject(projectName) {
 	  projectName = e.target.value;
 	}
 
+	function clearProjectTitleInput() {
+		projectTitleInput.value = ''
+	}
+
 	addProjectBtn.addEventListener('click', function() {
 		let titleValidity = projectTitleInput.checkValidity()
-		if (titleValidity) {modalAddProject(projectName)}
+		if (titleValidity) {
+			modalAddProject(projectName)
+			clearProjectTitleInput()
+		}
 	})
 })()
 
