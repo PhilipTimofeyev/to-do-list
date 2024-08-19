@@ -1,4 +1,6 @@
-import {tasks, Project} from "./taskList.js"
+import {tasks, Project, projects} from "./taskList.js"
+
+
 
 // DOM Elements
 const projectsContainer = document.getElementById('projects-container')
@@ -34,19 +36,33 @@ function displayAllTasks() {
 function displayNewProject(project) {
 	const newProjectElement = setupProjectTemplate(project)
 	projectsContainer.appendChild(newProjectElement);
+	// console.log(projects)
 }
 
 function modalAddProject(responseArr) {
-	// let listSize = tasks.list.length + 1
-	let newProject = new Project(2)
+	let listSize = projects.list.length + 1
+	let newProject = projects.addProject("haha", listSize)
 	displayNewProject(newProject)
 }
 
 addProjectBtn.addEventListener('click', function() {
-	// const newProject = new Project(2)
-	// projectTemp = setupProjectTemplate(newProject)
 	modalAddProject()
 })
+
+function resetProjectIds() {
+	projects.list.forEach((project, idx) => {
+		const newId = idx + 1
+		const projectElement = document.querySelector(`[data-id="${project.id}"]`)
+
+		projectElement.setAttribute('data-id', newId)
+		project.id = newId
+	})
+}
+
+function removeProjectElement(id) {
+	let projectToDelete = document.querySelector(`[data-id="${id}"]`)
+	projectToDelete.remove()
+}
 
 function setupProjectTemplate(project) {
 	let temp = document.getElementById("project-template");
@@ -55,6 +71,14 @@ function setupProjectTemplate(project) {
 	let deleteProjectBtn = projectTemp.getElementById('deleteProjectBtn')
 
 	let projectName = projectTemp.getElementById('project-name')
+
+	deleteProjectBtn.addEventListener("click", function() {
+		// console.log(project.id)
+		projects.deleteProject(project.id)
+		console.log(projects.list)
+		removeProjectElement(project.id)
+		resetProjectIds() 
+	});
 
 	projectTemp.firstElementChild.setAttribute('data-id', project.id)
 
