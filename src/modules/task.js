@@ -24,3 +24,8 @@ export function resetTaskIds(project) {
 		task.id = newId
 	})
 }
+
+export function parseDate(date) {
+	if (date === "") return null
+	return date.getFullYear().toString().padStart(4, '0') + '-' + (date.getMonth()+1).toString().padStart(2, '0') + '-' + date.getDate().toString().padStart(2, '0');
+}

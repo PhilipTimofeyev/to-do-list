@@ -1,5 +1,5 @@
-import {Project, projects} from "./projects.js"
-import {resetTaskIds} from "./task.js"
+import {Project, projects, resetProjectIds} from "./projects.js"
+import {parseDate, resetTaskIds} from "./task.js"
 
 
 // Global
@@ -80,15 +80,6 @@ function createProject(projectName) {
 	})
 })()
 
-function resetProjectIds() {
-	projects.list.forEach((project, idx) => {
-		const newId = idx + 1
-		const projectElement = document.querySelector(`[data-id="${project.id}"]`)
-
-		projectElement.setAttribute('data-id', newId)
-		project.id = newId
-	})
-}
 
 function removeProjectElement(id) {
 	let projectToDelete = document.querySelector(`[data-id="${id}"]`)
@@ -191,23 +182,6 @@ function clearForm() {
 	form.forEach((input) => input.value = "")
 }
 
-function parseDate(date) {
-	if (date === "") return null
-	return date.getFullYear().toString().padStart(4, '0') + '-' + (date.getMonth()+1).toString().padStart(2, '0') + '-' + date.getDate().toString().padStart(2, '0');
-}
-
-// function resetTaskIds(project) {
-// 	project.list.forEach((task, idx) => {
-// 		const newId = idx + 1
-// 		const taskElement = document.querySelector(`[data-task-id="${task.id}"]`)
-
-// 		taskElement.setAttribute('data-task-id', newId)
-// 		task.id = newId
-// 	})
-// }
-
-// resetTaskIds('lolol')
-
 
 // Extract to Modal Form Module
 
@@ -256,9 +230,5 @@ function modalUpdateTask(responseArr, taskForm, project) {
 
 
 export {displayApp};
-
-
-
-
 
 

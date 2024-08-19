@@ -43,6 +43,16 @@ class Projects {
 	}
 }
 
+export function resetProjectIds() {
+	projects.list.forEach((project, idx) => {
+		const newId = idx + 1
+		const projectElement = document.querySelector(`[data-id="${project.id}"]`)
+
+		projectElement.setAttribute('data-id', newId)
+		project.id = newId
+	})
+}
+
 
 const projects = new Projects
 
