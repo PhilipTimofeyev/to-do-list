@@ -14,3 +14,13 @@ export class Task {
 		this.priority = newPriority;
 	}
 }
+
+export function resetTaskIds(project) {
+	project.list.forEach((task, idx) => {
+		const newId = idx + 1
+		const taskElement = document.querySelector(`[data-task-id="${task.id}"]`)
+
+		taskElement.setAttribute('data-task-id', newId)
+		task.id = newId
+	})
+}

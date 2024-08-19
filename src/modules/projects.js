@@ -43,8 +43,8 @@ class Projects {
 	}
 }
 
-const tasks = new Project("P1", 1)
+
 const projects = new Projects
 
 
-export {tasks, projects};
+export {projects};

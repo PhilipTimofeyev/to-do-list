@@ -1,4 +1,5 @@
-import {tasks, Project, projects} from "./taskList.js"
+import {Project, projects} from "./projects.js"
+import {resetTaskIds} from "./task.js"
 
 
 // Global
@@ -12,31 +13,26 @@ const taskContainer = document.getElementById('tasks-container')
 // Buttons
 const addProjectBtn = document.getElementById('addProjectBtn')
 
+// Display
+
 function displayApp() {
 }
 
 function displayNewTask(task, project) {
-  	const newTaskElement = setupTemplate(task, project)
+  	const newTaskElement = setupTaskTemplate(task, project)
   	taskContainer.appendChild(newTaskElement);
 }
 
 function displayUpdatedTask(task, project) {
   	const oldTaskElement = document.querySelector(`[data-task-id="${taskForm.dataset.taskId}"]`)
-  	const newTaskElement = setupTemplate(task, project)
+  	const newTaskElement = setupTaskTemplate(task, project)
   	taskContainer.replaceChild(newTaskElement, oldTaskElement);
-}
-
-function displayAllTasks() {
-	tasks.list.forEach((task) => {
-  	const newTaskElement = setupTemplate(task)
-  	taskContainer.appendChild(newTaskElement);
-	})
 }
 
 function displayProject(project) {
 	removeChildren()
 	project.list.forEach((task) => {
-  	const newTaskElement = setupTemplate(task, project)
+  	const newTaskElement = setupTaskTemplate(task, project)
   	taskContainer.appendChild(newTaskElement);
 	})
 }
@@ -54,15 +50,12 @@ function displayNewProject(project) {
 	projectsContainer.appendChild(newProjectElement);
 }
 
-function modalAddProject(projectName) {
+function createProject(projectName) {
 	let listSize = projects.list.length + 1
 	let newProject = projects.addProject(projectName, listSize)
 
 	displayNewProject(newProject)
 }
-
-
-
 
 (function addProject() {
 	const projectTitleInput = document.getElementById("projectTitleInput");
@@ -81,7 +74,7 @@ function modalAddProject(projectName) {
 	addProjectBtn.addEventListener('click', function() {
 		let titleValidity = projectTitleInput.checkValidity()
 		if (titleValidity) {
-			modalAddProject(projectName)
+			createProject(projectName)
 			clearProjectTitleInput()
 		}
 	})
@@ -101,6 +94,8 @@ function removeProjectElement(id) {
 	let projectToDelete = document.querySelector(`[data-id="${id}"]`)
 	projectToDelete.remove()
 }
+
+
 
 function setupProjectTemplate(project) {
 	let temp = document.getElementById("project-template");
@@ -144,7 +139,7 @@ function removeTaskElement(id) {
 	taskToDelete.remove()
 }
 
-function setupTemplate(task, project) {
+function setupTaskTemplate(task, project) {
 	let temp = document.getElementById("task-template");
 	let taskTemp = temp.content.cloneNode(true);
 	let deleteTaskBtn = taskTemp.getElementById('deleteTaskBtn')
@@ -201,27 +196,17 @@ function parseDate(date) {
 	return date.getFullYear().toString().padStart(4, '0') + '-' + (date.getMonth()+1).toString().padStart(2, '0') + '-' + date.getDate().toString().padStart(2, '0');
 }
 
-function resetTaskIds(project) {
-	project.list.forEach((task, idx) => {
-		const newId = idx + 1
-		const taskElement = document.querySelector(`[data-task-id="${task.id}"]`)
+// function resetTaskIds(project) {
+// 	project.list.forEach((task, idx) => {
+// 		const newId = idx + 1
+// 		const taskElement = document.querySelector(`[data-task-id="${task.id}"]`)
 
-		taskElement.setAttribute('data-task-id', newId)
-		task.id = newId
-	})
-}
+// 		taskElement.setAttribute('data-task-id', newId)
+// 		task.id = newId
+// 	})
+// }
 
-function modalAddTask(responseArr, project) {
-	let listSize = project.list.length + 1
-	let newTask = project.addTask(...responseArr, listSize);
-	displayNewTask(newTask, project)
-}
-
-function modalUpdateTask(responseArr, taskForm, project) {
-	const task = project.findTask(taskForm.dataset.taskId)
-	task.updateTask(...responseArr)
-	displayUpdatedTask(task, project) 
-}
+// resetTaskIds('lolol')
 
 
 // Extract to Modal Form Module
@@ -257,4 +242,23 @@ cancelButton.addEventListener("click", (event) => {
 	taskForm.close(); 
 })
 
+function modalAddTask(responseArr, project) {
+	let listSize = project.list.length + 1
+	let newTask = project.addTask(...responseArr, listSize);
+	displayNewTask(newTask, project);
+}
+
+function modalUpdateTask(responseArr, taskForm, project) {
+	const task = project.findTask(taskForm.dataset.taskId);
+	task.updateTask(...responseArr);
+	displayUpdatedTask(task, project); 
+}
+
+
 export {displayApp};
+
+
+
+
+
+
