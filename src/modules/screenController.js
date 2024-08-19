@@ -1,26 +1,28 @@
 import {tasks, Project, projects} from "./taskList.js"
 
 
+// Global
+
+let workingProject
 
 // DOM Elements
 const projectsContainer = document.getElementById('projects-container')
 const taskContainer = document.getElementById('tasks-container')
 
 // Buttons
-const addTaskBtn = document.getElementById('addTaskBtn')
 const addProjectBtn = document.getElementById('addProjectBtn')
 
 function displayApp() {
 }
 
-function displayNewTask(task) {
-  	const newTaskElement = setupTemplate(task)
+function displayNewTask(task, project) {
+  	const newTaskElement = setupTemplate(task, project)
   	taskContainer.appendChild(newTaskElement);
 }
 
-function displayUpdatedTask(task) {
+function displayUpdatedTask(task, project) {
   	const oldTaskElement = document.querySelector(`[data-task-id="${taskForm.dataset.taskId}"]`)
-  	const newTaskElement = setupTemplate(task)
+  	const newTaskElement = setupTemplate(task, project)
   	taskContainer.replaceChild(newTaskElement, oldTaskElement);
 }
 
@@ -32,10 +34,17 @@ function displayAllTasks() {
 }
 
 function displayProject(project) {
+	removeChildren()
 	project.list.forEach((task) => {
-  	const newTaskElement = setupTemplate(task)
+  	const newTaskElement = setupTemplate(task, project)
   	taskContainer.appendChild(newTaskElement);
 	})
+}
+
+function removeChildren() {
+	while (taskContainer.firstChild) { 
+	    taskContainer.firstChild.remove(); 
+	}
 }
 
 // Projects
@@ -47,10 +56,12 @@ function displayNewProject(project) {
 
 function modalAddProject(projectName) {
 	let listSize = projects.list.length + 1
-	// console.log(projectName)
 	let newProject = projects.addProject(projectName, listSize)
+
 	displayNewProject(newProject)
 }
+
+
 
 
 (function addProject() {
@@ -91,15 +102,12 @@ function removeProjectElement(id) {
 	projectToDelete.remove()
 }
 
-// const log = document.getElementById("values");
-
-
-
 function setupProjectTemplate(project) {
 	let temp = document.getElementById("project-template");
 	let projectTemp = temp.content.cloneNode(true);
 	let showProjectBtn = projectTemp.getElementById('showProjectBtn')
 	let deleteProjectBtn = projectTemp.getElementById('deleteProjectBtn')
+	const addTaskBtn = projectTemp.getElementById('addTaskBtn')
 
 	let projectName = projectTemp.getElementById('project-name')
 
@@ -107,6 +115,13 @@ function setupProjectTemplate(project) {
 		projects.deleteProject(project.id)
 		removeProjectElement(project.id)
 		resetProjectIds() 
+	});
+
+	addTaskBtn.addEventListener("click", () => {
+		taskForm.dataset.action = "add";
+		clearForm()
+	  taskForm.showModal();
+	  workingProject = project
 	});
 
 	showProjectBtn.addEventListener("click", function() {
@@ -126,11 +141,10 @@ function setupProjectTemplate(project) {
 	
 function removeTaskElement(id) {
 	let taskToDelete = document.querySelector(`[data-task-id="${id}"]`)
-	console.log(taskToDelete)
 	taskToDelete.remove()
 }
 
-function setupTemplate(task) {
+function setupTemplate(task, project) {
 	let temp = document.getElementById("task-template");
 	let taskTemp = temp.content.cloneNode(true);
 	let deleteTaskBtn = taskTemp.getElementById('deleteTaskBtn')
@@ -143,15 +157,15 @@ function setupTemplate(task) {
 
 
 	deleteTaskBtn.addEventListener("click", function() {
-		tasks.deleteTask(task.id)
+		project.deleteTask(task.id)
 		removeTaskElement(task.id)
-		resetTaskIds() 
+		resetTaskIds(project) 
 	});
 
 	updateTaskBtn.addEventListener("click", function() {
 		taskForm.dataset.action = "update";
 		taskForm.dataset.taskId = task.id;
-		fillForm(task.id); 
+		fillForm(task.id, project); 
 		taskForm.showModal();
 	});
 
@@ -165,8 +179,8 @@ function setupTemplate(task) {
 	return taskTemp
 }
 
-function fillForm(taskId) {
-	const task = tasks.findTask(taskId)
+function fillForm(taskId, project) {
+	const task = project.findTask(taskId)
 	const form = document.querySelectorAll(".formInput")
 
 	form.forEach((input) => {
@@ -187,8 +201,8 @@ function parseDate(date) {
 	return date.getFullYear().toString().padStart(4, '0') + '-' + (date.getMonth()+1).toString().padStart(2, '0') + '-' + date.getDate().toString().padStart(2, '0');
 }
 
-function resetTaskIds() {
-	tasks.list.forEach((task, idx) => {
+function resetTaskIds(project) {
+	project.list.forEach((task, idx) => {
 		const newId = idx + 1
 		const taskElement = document.querySelector(`[data-task-id="${task.id}"]`)
 
@@ -197,16 +211,16 @@ function resetTaskIds() {
 	})
 }
 
-function modalAddTask(responseArr) {
-	let listSize = tasks.list.length + 1
-	let newTask = tasks.addTask(...responseArr, listSize);
-	displayNewTask(newTask)
+function modalAddTask(responseArr, project) {
+	let listSize = project.list.length + 1
+	let newTask = project.addTask(...responseArr, listSize);
+	displayNewTask(newTask, project)
 }
 
-function modalUpdateTask(responseArr, taskForm) {
-	const task = tasks.findTask(taskForm.dataset.taskId)
+function modalUpdateTask(responseArr, taskForm, project) {
+	const task = project.findTask(taskForm.dataset.taskId)
 	task.updateTask(...responseArr)
-	displayUpdatedTask(task) 
+	displayUpdatedTask(task, project) 
 }
 
 
@@ -218,11 +232,6 @@ const selectFormInputs = taskForm.querySelectorAll(".formInput");
 const confirmBtn = taskForm.querySelector("#confirmBtn");
 const cancelButton = document.getElementById("cancelBtn");
 
-addTaskBtn.addEventListener("click", () => {
-	taskForm.dataset.action = "add";
-	clearForm()
-  taskForm.showModal();
-});
 
 confirmBtn.addEventListener("click", (event) => {
 	if (!form.reportValidity()) return
@@ -234,9 +243,9 @@ confirmBtn.addEventListener("click", (event) => {
   })
 
   if (taskForm.dataset.action === 'add') {
-  	modalAddTask(responseArr)
+  	modalAddTask(responseArr, workingProject)
   } else {
-  	modalUpdateTask(responseArr, taskForm)
+  	modalUpdateTask(responseArr, taskForm, workingProject)
   }
   event.preventDefault();
   taskForm.close(); 
@@ -247,7 +256,5 @@ cancelButton.addEventListener("click", (event) => {
 	event.preventDefault();
 	taskForm.close(); 
 })
-
-// displayAllTasks()
 
 export {displayApp};

@@ -37,6 +37,10 @@ class Projects {
 	deleteProject(id) {
 		this.list = this.list.filter((project) => project.id != id)
 	}
+
+	findProject(id) {
+		return this.list.find((project) => project.id == id)
+	}
 }
 
 const tasks = new Project("P1", 1)
