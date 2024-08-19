@@ -9,7 +9,7 @@
 	<h1> To-Do App </h1>
 	<div class='main-container'>
 	<nav> 
-		<h3> Projects </h3>
+		<h2> Projects </h2>
 			<ul id="projects-container">
 				<input type="text" id="projectTitleInput" name="projectTitle" required minlength="1"/>
 				<button id="addProjectBtn">Add Project</button>
@@ -29,9 +29,13 @@
 			<div>
 				<div>
 			  <h2 id='task-title'>Title</h2>
-			  <h2 id='task-description'> Description </h2>
-			  <h2 id='task-date'> Date </h2>
-			  <h2 id='task-priority'> Priority </h2>
+			  <details>
+			  	<summary>Details</summary>
+				  <h2 id='task-description'> Description </h2>
+				  <h2 id='task-date'> Date </h2>
+				  <h2 id='task-priority'> Priority </h2>
+			</details>
+			<button type="button" id="completedBtn">To Do</button>
 			</div>
 			<button id="deleteTaskBtn">Delete Task</button>
 			<button id="updateTaskBtn">Update Task</button>

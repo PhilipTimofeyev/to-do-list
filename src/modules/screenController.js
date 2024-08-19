@@ -14,7 +14,6 @@ const taskContainer = document.getElementById('tasks-container')
 const addProjectBtn = document.getElementById('addProjectBtn')
 
 // Display
-
 function displayApp() {
 }
 
@@ -135,12 +134,19 @@ function setupTaskTemplate(task, project) {
 	let taskTemp = temp.content.cloneNode(true);
 	let deleteTaskBtn = taskTemp.getElementById('deleteTaskBtn')
 	let updateTaskBtn = taskTemp.getElementById('updateTaskBtn')
+	let completedBtn = taskTemp.getElementById('completedBtn')
 
 	let title = taskTemp.getElementById('task-title')
 	let description = taskTemp.getElementById('task-description')
 	let date = taskTemp.getElementById('task-date')
 	let priority = taskTemp.getElementById('task-priority')
 
+
+	completedBtn.addEventListener("click", function() {
+		task.toggleCompleted()
+		completedBtn.innerText = completedBtn.innerText === 'To Do' ? 'Done' : `To Do`;
+		console.log(task)
+	});
 
 	deleteTaskBtn.addEventListener("click", function() {
 		project.deleteTask(task.id)

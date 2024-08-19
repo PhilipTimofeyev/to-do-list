@@ -5,6 +5,7 @@ export class Task {
 		this.date = date;
 		this.priority = priority;
 		this.id = id;
+		this.complete = false
 	}
 
 	updateTask(newTitle, newDescription, newDate, newPriority) {
@@ -12,6 +13,11 @@ export class Task {
 		this.description = newDescription;
 		this.date = newDate;
 		this.priority = newPriority;
+	}
+
+	toggleCompleted() {
+		// console.log(this.complete)
+		this.complete = this.complete === false ? true : false
 	}
 }
 
