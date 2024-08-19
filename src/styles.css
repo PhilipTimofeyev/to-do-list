@@ -4,6 +4,19 @@ h1 {
 	text-align: center;
 }
 
+nav {
+	width: 15vw;
+	height: 80vh;
+	border: solid black;
+
+}
+
+.main-container {
+	display: flex;
+	gap: 15vw
+/*	flex-direction: column;*/
+}
+
 #tasks-container {
 	display: flex;
 	flex-direction: column;

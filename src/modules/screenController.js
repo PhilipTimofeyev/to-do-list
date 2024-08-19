@@ -1,10 +1,12 @@
-import {tasks} from "./taskList.js"
+import {tasks, Project} from "./taskList.js"
 
 // DOM Elements
+const projectsContainer = document.getElementById('projects-container')
 const taskContainer = document.getElementById('tasks-container')
 
 // Buttons
 const addTaskBtn = document.getElementById('addTaskBtn')
+const addProjectBtn = document.getElementById('addProjectBtn')
 
 function displayApp() {
 }
@@ -25,6 +27,40 @@ function displayAllTasks() {
   	const newTaskElement = setupTemplate(task)
   	taskContainer.appendChild(newTaskElement);
 	})
+}
+
+// Projects
+
+function displayNewProject(project) {
+	const newProjectElement = setupProjectTemplate(project)
+	projectsContainer.appendChild(newProjectElement);
+}
+
+function modalAddProject(responseArr) {
+	// let listSize = tasks.list.length + 1
+	let newProject = new Project(2)
+	displayNewProject(newProject)
+}
+
+addProjectBtn.addEventListener('click', function() {
+	// const newProject = new Project(2)
+	// projectTemp = setupProjectTemplate(newProject)
+	modalAddProject()
+})
+
+function setupProjectTemplate(project) {
+	let temp = document.getElementById("project-template");
+	let projectTemp = temp.content.cloneNode(true);
+	let showProjectBtn = projectTemp.getElementById('showProjectBtn')
+	let deleteProjectBtn = projectTemp.getElementById('deleteProjectBtn')
+
+	let projectName = projectTemp.getElementById('project-name')
+
+	projectTemp.firstElementChild.setAttribute('data-id', project.id)
+
+	projectName.innerText = "Yay"
+
+	return projectTemp
 }
 
 // Misc Functions (Add to seperate module)
@@ -148,6 +184,7 @@ confirmBtn.addEventListener("click", (event) => {
 });
 
 cancelButton.addEventListener("click", (event) => {
+	event.preventDefault();
 	taskForm.close(); 
 })
 

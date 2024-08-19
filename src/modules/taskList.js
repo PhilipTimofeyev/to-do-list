@@ -1,8 +1,9 @@
 import {Task} from "./task.js"
 
-class Tasks {
-	constructor() {
+export class Project {
+	constructor(id) {
 		this.list = [new Task("First Task", "Task Description", new Date("2/1/22"), "High", 1), new Task("Second Task", "Task Description", new Date("3/1/23"), "Low", 2)]
+		this.id = id;
 	}
 
 	addTask(title, description, date, priority, id) {
@@ -21,7 +22,7 @@ class Tasks {
 }
 
 
-const tasks = new Tasks
+const tasks = new Project(1)
 
 
 export {tasks};
