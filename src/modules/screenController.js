@@ -36,18 +36,31 @@ function displayAllTasks() {
 function displayNewProject(project) {
 	const newProjectElement = setupProjectTemplate(project)
 	projectsContainer.appendChild(newProjectElement);
-	// console.log(projects)
 }
 
-function modalAddProject(responseArr) {
+function modalAddProject(projectName) {
 	let listSize = projects.list.length + 1
-	let newProject = projects.addProject("haha", listSize)
+	// console.log(projectName)
+	let newProject = projects.addProject(projectName, listSize)
 	displayNewProject(newProject)
 }
 
+let projectName
+
+const projectTitleInput = document.getElementById("projectTitleInput");
+
+projectTitleInput.addEventListener("input", updateValue);
+function updateValue(e) {
+  projectName = e.target.value;
+}
+
+
 addProjectBtn.addEventListener('click', function() {
-	modalAddProject()
+	console.log(projectName)
+	modalAddProject(projectName)
 })
+
+// projectTitleInput.addEventListener("input", updateValue);
 
 function resetProjectIds() {
 	projects.list.forEach((project, idx) => {
@@ -64,6 +77,10 @@ function removeProjectElement(id) {
 	projectToDelete.remove()
 }
 
+// const log = document.getElementById("values");
+
+
+
 function setupProjectTemplate(project) {
 	let temp = document.getElementById("project-template");
 	let projectTemp = temp.content.cloneNode(true);
@@ -73,16 +90,14 @@ function setupProjectTemplate(project) {
 	let projectName = projectTemp.getElementById('project-name')
 
 	deleteProjectBtn.addEventListener("click", function() {
-		// console.log(project.id)
 		projects.deleteProject(project.id)
-		console.log(projects.list)
 		removeProjectElement(project.id)
 		resetProjectIds() 
 	});
 
 	projectTemp.firstElementChild.setAttribute('data-id', project.id)
 
-	projectName.innerText = "Yay"
+	projectName.innerText = project.name
 
 	return projectTemp
 }
