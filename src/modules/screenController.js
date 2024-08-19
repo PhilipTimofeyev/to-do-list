@@ -19,13 +19,20 @@ function displayNewTask(task) {
 }
 
 function displayUpdatedTask(task) {
-  	const oldTaskElement = document.querySelector(`[data-id="${taskForm.dataset.taskId}"]`)
+  	const oldTaskElement = document.querySelector(`[data-task-id="${taskForm.dataset.taskId}"]`)
   	const newTaskElement = setupTemplate(task)
   	taskContainer.replaceChild(newTaskElement, oldTaskElement);
 }
 
 function displayAllTasks() {
 	tasks.list.forEach((task) => {
+  	const newTaskElement = setupTemplate(task)
+  	taskContainer.appendChild(newTaskElement);
+	})
+}
+
+function displayProject(project) {
+	project.list.forEach((task) => {
   	const newTaskElement = setupTemplate(task)
   	taskContainer.appendChild(newTaskElement);
 	})
@@ -102,6 +109,10 @@ function setupProjectTemplate(project) {
 		resetProjectIds() 
 	});
 
+	showProjectBtn.addEventListener("click", function() {
+		displayProject(project)
+	});
+
 	projectTemp.firstElementChild.setAttribute('data-id', project.id)
 
 	projectName.innerText = project.name
@@ -109,10 +120,13 @@ function setupProjectTemplate(project) {
 	return projectTemp
 }
 
+// 
+
 // Misc Functions (Add to seperate module)
 	
 function removeTaskElement(id) {
-	let taskToDelete = document.querySelector(`[data-id="${id}"]`)
+	let taskToDelete = document.querySelector(`[data-task-id="${id}"]`)
+	console.log(taskToDelete)
 	taskToDelete.remove()
 }
 
@@ -141,7 +155,7 @@ function setupTemplate(task) {
 		taskForm.showModal();
 	});
 
-	taskTemp.firstElementChild.setAttribute('data-id', task.id)
+	taskTemp.firstElementChild.setAttribute('data-task-id', task.id)
 
 	title.innerText = task.title
 	description.innerText = task.description
@@ -176,9 +190,9 @@ function parseDate(date) {
 function resetTaskIds() {
 	tasks.list.forEach((task, idx) => {
 		const newId = idx + 1
-		const taskElement = document.querySelector(`[data-id="${task.id}"]`)
+		const taskElement = document.querySelector(`[data-task-id="${task.id}"]`)
 
-		taskElement.setAttribute('data-id', newId)
+		taskElement.setAttribute('data-task-id', newId)
 		task.id = newId
 	})
 }
@@ -234,6 +248,6 @@ cancelButton.addEventListener("click", (event) => {
 	taskForm.close(); 
 })
 
-displayAllTasks()
+// displayAllTasks()
 
 export {displayApp};

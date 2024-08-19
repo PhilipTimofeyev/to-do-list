@@ -4,7 +4,8 @@ export class Project {
 	constructor(name, id) {
 		this.name = name;
 		this.id = id;
-		this.list = [new Task("First Task", "Task Description", new Date("2/1/22"), "High", 1), new Task("Second Task", "Task Description", new Date("3/1/23"), "Low", 2)]
+		// this.list = [new Task("First Task", "Task Description", new Date("2/1/22"), "High", 1), new Task("Second Task", "Task Description", new Date("3/1/23"), "Low", 2)]
+		this.list = []
 	}
 
 	addTask(title, description, date, priority, id) {
