@@ -130,19 +130,21 @@ function removeTaskElement(id) {
 }
 
 function setupTaskTemplate(task, project) {
+	// Get DOM temp and buttons
 	let temp = document.getElementById("task-template");
 	let taskTemp = temp.content.cloneNode(true);
 	let deleteTaskBtn = taskTemp.getElementById('deleteTaskBtn')
 	let updateTaskBtn = taskTemp.getElementById('updateTaskBtn')
-	let taskCheckbox = taskTemp.getElementById('taskCheckbox')
 
+	// Get Temp elements
 	let title = taskTemp.getElementById('task-title')
 	let description = taskTemp.getElementById('task-description')
 	let date = taskTemp.getElementById('task-date')
 	let priority = taskTemp.getElementById('task-priority')
+	let taskCheckbox = taskTemp.getElementById('taskCheckbox')
 
 	taskCheckbox.addEventListener("change", function() {
-		task.complete = taskCheckbox.checked
+		task.complete = this.checked
 	});
 
 	deleteTaskBtn.addEventListener("click", function() {
@@ -164,6 +166,7 @@ function setupTaskTemplate(task, project) {
 	description.innerText = task.description
 	date.innerText = task.date
 	priority.innerText = task.priority
+	taskCheckbox.checked = task.complete
 
 	return taskTemp
 }
