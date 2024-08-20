@@ -1,5 +1,10 @@
 import {Project, projects, resetProjectIds, clearBackground} from "./projects.js"
 import {parseDate, resetTaskIds} from "./task.js"
+// import { formatDistance, subDays } from "date-fns";
+const dateFns = require("date-fns");
+
+// let x = '2000-03-15'
+// console.log(dateFns.parse(x, 'yyyy-MM-dd', new Date()));
 
 
 // Global
@@ -147,6 +152,8 @@ function setupTaskTemplate(task, project) {
 		task.complete = this.checked
 	});
 
+	// Add event handlers
+
 	deleteTaskBtn.addEventListener("click", function() {
 		project.deleteTask(task.id)
 		removeTaskElement(task.id)
@@ -155,16 +162,21 @@ function setupTaskTemplate(task, project) {
 
 	updateTaskBtn.addEventListener("click", function() {
 		taskForm.dataset.action = "update";
+		console.log(task.date)
 		taskForm.dataset.taskId = task.id;
 		fillForm(task.id, project); 
 		taskForm.showModal();
 	});
 
+	// Set data id so element and task object are related
+
 	taskTemp.firstElementChild.setAttribute('data-task-id', task.id)
+
+	// Set text of element
 
 	title.innerText = task.title
 	description.innerText = task.description
-	date.innerText = task.date
+	date.innerText = dateFns.format(task.date, 'dd MMMM yyyy')
 	priority.innerText = task.priority
 	taskCheckbox.checked = task.complete
 
@@ -202,7 +214,9 @@ confirmBtn.addEventListener("click", (event) => {
 	if (!form.reportValidity()) return
   const responseArr = Array.from(selectFormInputs).map((el) => {
   	if (el.valueAsDate) {
-  		return new Date(el.value)
+  		let newDate = el.value
+  		let parsedDate = dateFns.parse(newDate, 'yyyy-MM-dd', new Date());
+  		return parsedDate
   	}
   	return el.value
   })
