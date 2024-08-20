@@ -90,9 +90,9 @@ function removeProjectElement(id) {
 function setupProjectTemplate(project) {
 	let temp = document.getElementById("project-template");
 	let projectTemp = temp.content.cloneNode(true);
-	let showProjectBtn = projectTemp.getElementById('showProjectBtn')
 	let deleteProjectBtn = projectTemp.getElementById('deleteProjectBtn')
 	const addTaskBtn = projectTemp.getElementById('addTaskBtn')
+	let showProjectLi = projectTemp.getElementById('showProjectLi')
 
 	let projectName = projectTemp.getElementById('project-name')
 
@@ -109,7 +109,7 @@ function setupProjectTemplate(project) {
 	  workingProject = project
 	});
 
-	showProjectBtn.addEventListener("click", function() {
+	showProjectLi.addEventListener("click", function() {
 		displayProject(project)
 	});
 

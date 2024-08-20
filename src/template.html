@@ -14,11 +14,10 @@
 				<input type="text" id="projectTitleInput" name="projectTitle" required minlength="1"/>
 				<button id="addProjectBtn">Add Project</button>
 				<template id="project-template">
-					<li>
+					<li id="showProjectLi">
 					  <h2 id='project-name'>Title</h2>
-						<button id="showProjectBtn">Show Project</button>
+					  <button id="addTaskBtn">Add Task</button>
 						<button id="deleteProjectBtn">Delete Project</button>
-						<button id="addTaskBtn">Add Task</button>
 					</li>
 				</template>
 			</ul>
@@ -26,23 +25,22 @@
 	<div id="tasks-container">
 		</div>
 		<template id="task-template">
+			<div class="task-card">
 			<div>
 			  <input type="checkbox" id="taskCheckbox" name="checkbox" />
 			  <label for="checkbox">Complete?</label>
 			</div>
 			<div>
-				<div>
 			  <h2 id='task-title'>Title</h2>
 			  <details>
 			  	<summary>Details</summary>
 				  <h2 id='task-description'> Description </h2>
 				  <h2 id='task-date'> Date </h2>
 				  <h2 id='task-priority'> Priority </h2>
-			</details>
-			<button type="button" id="completedBtn">To Do</button>
-			</div>
-			<button id="deleteTaskBtn">Delete Task</button>
-			<button id="updateTaskBtn">Update Task</button>
+				</details>
+					<button id="deleteTaskBtn">Delete Task</button>
+					<button id="updateTaskBtn">Update Task</button>
+				</div>
 			</div>
 		</template>
 	<dialog id="taskForm" data-action='add' data-taskId='0'>
