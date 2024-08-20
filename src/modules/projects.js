@@ -57,7 +57,7 @@ export function clearBackground() {
 	let li = document.querySelectorAll("li")
 
 	li.forEach((el)=> {
-		el.style.background = "white"
+		el.style.background = "transparent"
 	})
 }
 

@@ -7,6 +7,13 @@ body {
 
 h1 {
 	text-align: center;
+	color: darkblue;
+	font-size: 2.5em;
+/*	border: solid black;*/
+/*	width: 500px;*/
+	padding:20px 0;
+
+	margin: auto;
 }
 
 /*Navigation*/
@@ -16,12 +23,12 @@ h1 {
 }
 
 nav {
-/*	box-sizing: border-box;*/
 	width: 18vw;
-	max-height: 60vh;
-	border: solid rebeccapurple 5px;
+	max-height: 80vh;
+	border-right: solid rebeccapurple 5px;
 	overflow:scroll;
 	margin-left: 20px;
+	padding-right: 20px;
 }
 
 
@@ -32,15 +39,18 @@ nav ul {
 nav li {
 	box-sizing: border-box;
 	list-style-type: none;
-	border: solid black;
+	border: solid rebeccapurple 2px;
+	box-shadow: 10px 10px 5px #aaaaaa;
 	padding: 16px 0;
 	height: 10%;
 	border-radius: 5px;
+	margin: 20px 0;
 }
 
 nav h2 {
 	text-align: center;
-/*	color: #FFF;*/
+	color: darkblue;
+/*	text-decoration: underline;*/
 }
 
 #project-input-container {
@@ -77,9 +87,11 @@ details {
 	justify-content: space-between;
 	align-items: center;
 	gap: 60px;
-	border: solid rebeccapurple 10px;
+	border: solid rebeccapurple 3px;
 	padding:20px;
 	margin: 0 0 40px 0;
+	box-shadow: 10px 10px 5px #aaaaaa;
+	border-radius: 5px;
 }
 
 .main-container {
@@ -123,6 +135,10 @@ button {
 button:hover {
   box-shadow: rgba(80, 63, 205, 0.5) 0 1px 30px;
   transition-duration: .1s;
+}
+
+#addProjectBtn {
+	font-size: 1.6rem;
 }
 
 @media (min-width: 768px) {
