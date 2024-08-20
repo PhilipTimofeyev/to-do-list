@@ -93,9 +93,20 @@ nav li:hover {
 
 /*Main Page*/
 
-summary {
-/*	margin: 30px 0;*/
+detail {
+	margin-bottom: 10px;
+}
+
+.task-card p {
+	font-size: 1.4em;
+}
+
+summary,
+label {
+	margin: 20px 0;
 	font-size: 1.5em;
+	text-decoration: underline;
+	font-weight: bold;
 }
 
 #task-headers {
