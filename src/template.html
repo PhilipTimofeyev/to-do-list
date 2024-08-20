@@ -30,19 +30,21 @@
 		</div>
 		<template id="task-template">
 			<div class="task-card">
-			<div class='checkbox'>
-			  <input type="checkbox" id="taskCheckbox" name="checkbox" />
-			</div>
-			<div>
-			  <h2 id='task-title'>Title</h2>
-			  <details>
-			  	<summary>Details</summary>
-				  <h2 id='task-description'> Description </h2>
-				  <h2 id='task-date'> Date </h2>
-				  <h2 id='task-priority'> Priority </h2>
-				</details>
-					<button id="deleteTaskBtn">Delete Task</button>
-					<button id="updateTaskBtn">Update Task</button>
+				<div class='checkbox'>
+				  <input type="checkbox" id="taskCheckbox" name="checkbox" />
+				</div>
+				<!-- <div id="task-info"> -->
+				  <h2 id='task-title'>Title</h2>
+				  <details>
+				  	<summary>Details</summary>
+					  <h2 id='task-description'> Description </h2>
+					  <h2 id='task-date'> Date </h2>
+					  <h2 id='task-priority'> Priority </h2>
+					</details>
+					<div>
+						<button id="deleteTaskBtn">Delete Task</button>
+						<button id="updateTaskBtn">Update Task</button>
+					</div>
 				</div>
 			</div>
 		</template>

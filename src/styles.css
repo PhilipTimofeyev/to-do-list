@@ -57,18 +57,6 @@ nav li:hover {
 
 /*Main Page*/
 
-/*.incomplete {
-	background: lightblue;
-	width: 500px;
-	height: 500px;
-}
-
-.complete {
-	background: lightgreen;
-	width: 500px;
-	height: 500px;
-}*/
-
 details {
 	margin: 30px 0;
 }
@@ -76,6 +64,8 @@ details {
 .task-card {
 	box-sizing: border-box;
 	display: flex;
+	justify-content: space-between;
+	align-items: center;
 	gap: 60px;
 	border: solid rebeccapurple 10px;
 	padding:20px;
@@ -83,27 +73,16 @@ details {
 
 .main-container {
 	display: flex;
-	gap: 15vw
-/*	flex-direction: column;*/
+	gap: 5vw
 }
 
 #tasks-container {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
 	width: 70%;
-}
-
-.checkbox {
-	display: flex;
-	align-items: center;
-	gap: 20px;
-/*	height:100px*/
-/*	background: blue;*/
+	height: 80vh;
+	border: solid purple;
 }
 
 #taskCheckbox {
 	width: 24px;
 	height: 24px;
-
 }
