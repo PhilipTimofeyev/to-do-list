@@ -162,7 +162,6 @@ function setupTaskTemplate(task, project) {
 
 	updateTaskBtn.addEventListener("click", function() {
 		taskForm.dataset.action = "update";
-		console.log(task.date)
 		taskForm.dataset.taskId = task.id;
 		fillForm(task.id, project); 
 		taskForm.showModal();
@@ -176,7 +175,7 @@ function setupTaskTemplate(task, project) {
 
 	title.innerText = task.title
 	description.innerText = task.description
-	date.innerText = dateFns.format(task.date, 'dd MMMM yyyy')
+	date.innerText = task.date == "" ? "TBD" : dateFns.format(task.date, 'dd MMMM yyyy')
 	priority.innerText = task.priority
 	taskCheckbox.checked = task.complete
 
