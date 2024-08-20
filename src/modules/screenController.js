@@ -1,4 +1,4 @@
-import {Project, projects, resetProjectIds} from "./projects.js"
+import {Project, projects, resetProjectIds, clearBackground} from "./projects.js"
 import {parseDate, resetTaskIds} from "./task.js"
 
 
@@ -79,13 +79,10 @@ function createProject(projectName) {
 	})
 })()
 
-
 function removeProjectElement(id) {
 	let projectToDelete = document.querySelector(`[data-id="${id}"]`)
 	projectToDelete.remove()
 }
-
-
 
 function setupProjectTemplate(project) {
 	let temp = document.getElementById("project-template");
@@ -110,8 +107,11 @@ function setupProjectTemplate(project) {
 	});
 
 	showProjectLi.addEventListener("click", function() {
-		displayProject(project)
+		clearBackground()
+		showProjectLi.style.background = 'orange'
+		displayProject(project);
 	});
+
 
 	projectTemp.firstElementChild.setAttribute('data-id', project.id)
 

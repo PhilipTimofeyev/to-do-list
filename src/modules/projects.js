@@ -53,6 +53,20 @@ export function resetProjectIds() {
 	})
 }
 
+export function clearBackground() {
+	// Projects.list.forEach((project) => {
+
+	// })
+
+	let li = document.querySelectorAll("li")
+
+	li.forEach((el)=> {
+		el.style.background = "white"
+	})
+
+	console.log(li)
+}
+
 
 const projects = new Projects
 
