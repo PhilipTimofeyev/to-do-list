@@ -11,13 +11,17 @@
 	<nav> 
 		<h2> Projects </h2>
 			<ul id="projects-container">
+				<div id="project-input-container">
 				<input type="text" id="projectTitleInput" name="projectTitle" required minlength="1"/>
-				<button id="addProjectBtn">Add Project</button>
+				<button id="addProjectBtn">New Project</button>
+			</div>
 				<template id="project-template">
 					<li id="showProjectLi">
 					  <h2 id='project-name'>Title</h2>
-					  <button id="addTaskBtn">Add Task</button>
-						<button id="deleteProjectBtn">Delete Project</button>
+					  <div id="project-options">
+						  <button id="addTaskBtn">Add Task</button>
+							<button id="deleteProjectBtn">Delete Project</button>
+						</div>
 					</li>
 				</template>
 			</ul>

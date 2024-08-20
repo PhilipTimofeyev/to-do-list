@@ -4,16 +4,48 @@ h1 {
 	text-align: center;
 }
 
+/*Navigation*/
+
 nav {
+/*	box-sizing: border-box;*/
 	width: 15vw;
 	height: 80vh;
 	border: solid black;
+/*	padding: 20px;*/
 
+}
+
+nav li:hover {
+  background-color: yellow;
+}
+
+nav ul {
+	padding: 0;
+}
+
+nav li {
+	list-style-type: none;
+	border: solid black;
+	padding: 20px 0;
+/*	width: 100px;*/
 }
 
 nav h2 {
 	text-align: center;
 }
+
+#project-input-container {
+	display: flex;
+	justify-content: center;
+	margin-bottom: 30px;
+}
+
+#project-options {
+	display: flex;
+	justify-content: center;
+}
+
+/*Main Page*/
 
 details {
 	margin: 30px 0;
@@ -51,8 +83,4 @@ details {
 	width: 24px;
 	height: 24px;
 
-}
-
-li:hover {
-  background-color: yellow;
 }
