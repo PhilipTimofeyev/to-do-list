@@ -26,6 +26,14 @@
 				</template>
 			</ul>
 	</nav>
+	<div id="main-content">
+		<div id="task-headers">
+			<p> Completed? </p>
+			<p> Task </p>
+			<p> Info </p>
+			<p>  </p>
+			<p>  </p>
+		</div>
 	<div id="tasks-container">
 		</div>
 		<template id="task-template">
@@ -42,12 +50,13 @@
 					  <h2 id='task-priority'> Priority </h2>
 					</details>
 					<div>
-						<button id="deleteTaskBtn">Delete Task</button>
 						<button id="updateTaskBtn">Update Task</button>
+						<button id="deleteTaskBtn">Delete Task</button>
 					</div>
 				</div>
 			</div>
 		</template>
+	</div>
 	<dialog id="taskForm" data-action='add' data-taskId='0'>
 	  <form id='form'>
 	    <p>

@@ -108,7 +108,7 @@ function setupProjectTemplate(project) {
 
 	showProjectLi.addEventListener("click", function() {
 		clearBackground()
-		showProjectLi.style.background = 'rgba(54, 119, 224, 1)'
+		showProjectLi.style.background = 'rgba(156, 16, 6, 1)'
 		displayProject(project);
 	});
 

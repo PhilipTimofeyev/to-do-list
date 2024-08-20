@@ -72,13 +72,34 @@ nav h2 {
 }
 
 nav li:hover {
-  background-color: rgba(54, 119, 224, .6)!important;
+  background-color: rgba(156, 16, 6, .8)!important;
 }
 
 /*Main Page*/
 
 details {
 	margin: 30px 0;
+}
+
+#task-headers {
+	box-sizing: border-box;
+	display: flex;
+/*	justify-content: space-between;*/
+	margin: 0 50px;
+/*gap:20px;*/
+	align-items: center;
+	gap: 60px;
+	padding:20px;
+	margin: 0 0 40px 0;
+	border-radius: 5px;
+	width: 60vw;
+	font-size: 1.3em;
+	font-weight: bold
+/*	width: 70vh;*/
+}
+
+#task-headers p {
+	margin-right: 7em;
 }
 
 .task-card {
@@ -92,6 +113,7 @@ details {
 	margin: 0 0 40px 0;
 	box-shadow: 10px 10px 5px #aaaaaa;
 	border-radius: 5px;
+	width: 60vw;
 }
 
 .main-container {
@@ -99,8 +121,12 @@ details {
 	gap: 5vw
 }
 
+#main-content {
+/*	width: 0vw;*/
+}
+
 #tasks-container {
-	width: 70%;
+/*	width: 70%;*/
 	height: 80vh;
 /*	border: solid purple;*/
 }
