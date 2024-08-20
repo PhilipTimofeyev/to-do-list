@@ -57,7 +57,7 @@ export function clearBackground() {
 	let li = document.querySelectorAll("li")
 
 	li.forEach((el)=> {
-		el.style.background = "transparent"
+		el.style.background = `rgba(54, 119, 224, .3)`
 	})
 }
 
