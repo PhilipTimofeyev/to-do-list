@@ -67,6 +67,10 @@ class Projects {
 			project.id = newId
 		})
 	}
+
+	count() {
+		return this.list.length
+	}
 }
 
 export function clearBackground() {

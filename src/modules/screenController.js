@@ -33,8 +33,8 @@ function displayUpdatedTask(task, project) {
 function displayProject(project) {
 	removeChildren()
 	project.list.forEach((task) => {
-  	const newTaskElement = setupTaskTemplate(task, project)
-  	taskContainer.appendChild(newTaskElement);
+		const newTaskElement = setupTaskTemplate(task, project)
+		taskContainer.appendChild(newTaskElement);
 	})
 }
 
@@ -47,12 +47,12 @@ function removeChildren() {
 function displayNewProject(project) {
 	const newProjectElement = setupProjectTemplate(project)
 	projectsContainer.appendChild(newProjectElement);
-	projectsCountEl.innerText = `Projects (${projectsCount})`
+	projectsCountEl.innerText = `Projects (${projects.count()})`
 }
 
 function removeProjectElement(id) {
 	let projectToDelete = document.querySelector(`[data-id="${id}"]`)
-	projectsCountEl.innerText = `Projects (${projectsCount})`
+	projectsCountEl.innerText = `Projects (${projects.count()})`
 	projectToDelete.remove()
 }
 
@@ -83,7 +83,6 @@ function createProject(projectName) {
 	addProjectBtn.addEventListener('click', function() {
 		let titleValidity = projectTitleInput.checkValidity()
 		if (titleValidity) {
-			projectsCount++
 			createProject(projectName)
 			clearProjectTitleInput()
 		}
@@ -100,7 +99,6 @@ function setupProjectTemplate(project) {
 	let projectName = projectTemp.getElementById('project-name')
 
 	deleteProjectBtn.addEventListener("click", function() {
-		projectsCount--
 		projects.deleteProject(project.id)
 		removeProjectElement(project.id)
 		projects.resetProjectIds() 
