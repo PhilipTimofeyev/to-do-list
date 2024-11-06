@@ -14,6 +14,10 @@ export class Project {
 		return newTask
 	}
 
+	deleteAllTasks() {
+		this.list = []
+	}
+
 	deleteTask(id) {
 		this.list = this.list.filter((task) => task.id != id)
 	}
@@ -35,6 +39,9 @@ class Projects {
 	}
 
 	deleteProject(id) {
+		const selectedProject = this.list.find(project => project.id === id)
+		
+		selectedProject.deleteAllTasks()
 		this.list = this.list.filter((project) => project.id != id)
 	}
 
