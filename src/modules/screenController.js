@@ -1,19 +1,16 @@
-import {Project, projects, resetProjectIds, clearBackground} from "./projects.js"
-import {parseDate, resetTaskIds} from "./task.js"
-// import { formatDistance, subDays } from "date-fns";
+import { projects, clearBackground } from "./projects.js"
+import { parseDate } from "./task.js"
 const dateFns = require("date-fns");
-
-// let x = '2000-03-15'
-// console.log(dateFns.parse(x, 'yyyy-MM-dd', new Date()));
-
 
 // Global
 
 let workingProject
+let projectsCount = 0
 
 // DOM Elements
 const projectsContainer = document.getElementById('projects-container')
 const taskContainer = document.getElementById('tasks-container')
+const projectsCountEl = document.getElementById('projects-count')
 
 // Buttons
 const addProjectBtn = document.getElementById('addProjectBtn')
@@ -47,17 +44,25 @@ function removeChildren() {
 	}
 }
 
-// Projects
-
 function displayNewProject(project) {
 	const newProjectElement = setupProjectTemplate(project)
 	projectsContainer.appendChild(newProjectElement);
+	projectsCountEl.innerText = `Projects (${projectsCount})`
 }
 
+function removeProjectElement(id) {
+	let projectToDelete = document.querySelector(`[data-id="${id}"]`)
+	projectsCountEl.innerText = `Projects (${projectsCount})`
+	projectToDelete.remove()
+}
+
+
+// Projects
+
 function createProject(projectName) {
+	console.log(projectsCount)
 	let listSize = projects.list.length + 1
 	let newProject = projects.addProject(projectName, listSize)
-
 	displayNewProject(newProject)
 }
 
@@ -78,16 +83,12 @@ function createProject(projectName) {
 	addProjectBtn.addEventListener('click', function() {
 		let titleValidity = projectTitleInput.checkValidity()
 		if (titleValidity) {
+			projectsCount++
 			createProject(projectName)
 			clearProjectTitleInput()
 		}
 	})
 })()
-
-function removeProjectElement(id) {
-	let projectToDelete = document.querySelector(`[data-id="${id}"]`)
-	projectToDelete.remove()
-}
 
 function setupProjectTemplate(project) {
 	let temp = document.getElementById("project-template");
@@ -99,9 +100,10 @@ function setupProjectTemplate(project) {
 	let projectName = projectTemp.getElementById('project-name')
 
 	deleteProjectBtn.addEventListener("click", function() {
+		projectsCount--
 		projects.deleteProject(project.id)
 		removeProjectElement(project.id)
-		resetProjectIds() 
+		projects.resetProjectIds() 
 	});
 
 	addTaskBtn.addEventListener("click", () => {
@@ -157,7 +159,8 @@ function setupTaskTemplate(task, project) {
 	deleteTaskBtn.addEventListener("click", function() {
 		project.deleteTask(task.id)
 		removeTaskElement(task.id)
-		resetTaskIds(project) 
+		project.resetTaskIds() 
+		// resetTaskIds(project) 
 	});
 
 	updateTaskBtn.addEventListener("click", function() {
