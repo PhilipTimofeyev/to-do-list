@@ -34,6 +34,10 @@ export class Project {
 			task.id = newId
 		})
 	}
+
+	count() {
+		return this.list.length
+	}
 }
 
 class Projects {

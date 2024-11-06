@@ -5,7 +5,6 @@ const dateFns = require("date-fns");
 // Global
 
 let workingProject
-let projectsCount = 0
 
 // DOM Elements
 const projectsContainer = document.getElementById('projects-container')
@@ -22,6 +21,7 @@ function displayApp() {
 function displayNewTask(task, project) {
   	const newTaskElement = setupTaskTemplate(task, project)
   	taskContainer.appendChild(newTaskElement);
+	updatedTaskCount(project)
 }
 
 function displayUpdatedTask(task, project) {
@@ -60,7 +60,6 @@ function removeProjectElement(id) {
 // Projects
 
 function createProject(projectName) {
-	console.log(projectsCount)
 	let listSize = projects.list.length + 1
 	let newProject = projects.addProject(projectName, listSize)
 	displayNewProject(newProject)
@@ -158,7 +157,7 @@ function setupTaskTemplate(task, project) {
 		project.deleteTask(task.id)
 		removeTaskElement(task.id)
 		project.resetTaskIds() 
-		// resetTaskIds(project) 
+		updatedTaskCount(project)
 	});
 
 	updateTaskBtn.addEventListener("click", function() {
@@ -181,6 +180,11 @@ function setupTaskTemplate(task, project) {
 	taskCheckbox.checked = task.complete
 
 	return taskTemp
+}
+
+function updatedTaskCount(project) {
+	const taskCountEl = document.querySelector(`[data-id="${project.id}"] h4`)
+	taskCountEl.innerText = `Tasks: (${project.count()})`
 }
 
 function fillForm(taskId, project) {
