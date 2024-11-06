@@ -31,22 +31,21 @@
 			</ul>
 	</nav>
 	<div id="main-content">
-		<div id="task-headers">
+		<div id="task-headers" class="grid-container">
 			<p> Completed </p>
 			<p> Task </p>
-			<p>  </p>
 			<p> Due Date </p>
 			<p> Info </p>
-			<p>  </p>
+			<p>Action</p>
 		</div>
 	<div id="tasks-container">
 		</div>
 		<template id="task-template">
-			<div class="task-card">
+			<div class="task-card grid-item">
 				<div class='checkbox'>
 				  <input type="checkbox" id="taskCheckbox" name="checkbox" />
 				</div>
-				  <p id='task-title'>Title<p>
+				  <p id='task-title'>Title</p>
 				  <p id='task-date'> Date </p>
 				  <details>
 			  	<summary>Details</summary>
@@ -55,7 +54,7 @@
 					  <label> Priority </label>
 					  <p id='task-priority'> Priority </p>
 					</details>
-					<div>
+					<div class="actionBtns">
 						<button id="updateTaskBtn">Update Task</button>
 						<button id="deleteTaskBtn">Delete Task</button>
 					</div>

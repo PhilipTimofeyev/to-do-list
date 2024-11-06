@@ -1,4 +1,16 @@
 
+
+:root {
+	--step--2: clamp(0.7813rem, 0.7747rem + 0.0326vw, 0.8rem);
+	--step--1: clamp(0.9375rem, 0.9158rem + 0.1087vw, 1rem);
+	--step-0: clamp(1.125rem, 1.0815rem + 0.2174vw, 1.25rem);
+	--step-1: clamp(1.35rem, 1.2761rem + 0.3696vw, 1.5625rem);
+	--step-2: clamp(1.62rem, 1.5041rem + 0.5793vw, 1.9531rem);
+	--step-3: clamp(1.944rem, 1.771rem + 0.8651vw, 2.4414rem);
+	--step-4: clamp(2.3328rem, 2.0827rem + 1.2504vw, 3.0518rem);
+	--step-5: clamp(2.7994rem, 2.4462rem + 1.7658vw, 3.8147rem);
+}
+
 body {
 /*	margin: 20px;*/
 	padding: 10px;
@@ -11,7 +23,7 @@ body {
 h1 {
 	text-align: center;
 	color: white;
-	font-size: 2.5em;
+	/* font-size: 2.5em; */
 	padding:10px 0;
 	margin: auto;
 	background-color: rgba(54, 119, 224, 1);
@@ -27,9 +39,9 @@ h1 {
 
 nav {
 	width: 18vw;
-	max-height: 80vh;
+	/* max-height: 80vh; */
 	border-right: solid rebeccapurple 5px;
-	overflow:scroll;
+	overflow-y: scroll;
 	margin-left: 20px;
 	padding-right: 20px;
 }
@@ -70,7 +82,7 @@ nav h2 {
 }
 
 #projectTitleInput {
-	font-size: 1.2rem;
+	/* font-size: 1.2rem; */
 	letter-spacing: 1.2px;
 }
 
@@ -93,36 +105,52 @@ nav li:hover {
 
 /*Main Page*/
 
-detail {
+#main-content {
+	/* max-width: 80dvw; */
+}
+
+summary {
 	margin-bottom: 10px;
+	/* max-width: fit-content; */
+}
+
+#task-description {
+	/* width: 40%; */
 }
 
 .task-card p {
-	font-size: 1.4em;
+	/* font-size: 1.4em; */
 }
 
 summary,
 .task-card label {
 	margin: 20px 0;
-	font-size: 1.5em;
+	/* font-size: 1.5em; */
 	text-decoration: underline;
 	font-weight: bold;
 }
 
 #task-headers {
-	box-sizing: border-box;
-	display: flex;
-	justify-content: space-between;
-	margin: 0 50px;
+	font-size: var(--step-0);
+}
+
+#task-headers, .task-card {
+	display: grid;
+	grid-template-columns: 150px repeat(4, minmax(250px, auto));
+	justify-items: start;
 	align-items: center;
-	text-decoration: underline;
-	padding:20px;
-	margin: 0 0 40px 0;
+	padding: 10px;
+	word-wrap: break-word;
 	border-radius: 5px;
-	width: 60vw;
-	font-size: 1.3em;
-	font-weight: bold
-/*	width: 70vh;*/
+	font-weight: bold;
+}
+
+
+.actionBtns {
+	display: flex;
+	gap: 10px;
+	/* margin-right: 10px; */
+	/* font-size: var(--step--3); */
 }
 
 #task-headers p {
@@ -130,22 +158,22 @@ summary,
 }
 
 #task-title {
-	width: 200px;
+	/* width: 200px; */
 	text-align: center;
+}
+
+p {
+	/* max-width: fit-content; */
 }
 
 .task-card {
 	box-sizing: border-box;
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	gap: 60px;
+	font-size: var(--step--1);
 	border: solid rebeccapurple 3px;
-	padding:20px;
-	margin: 0 0 40px 0;
+	margin-bottom: 40px;
 	box-shadow: 10px 10px 5px #aaaaaa;
 	border-radius: 5px;
-	width: 70vw;
+	/* min-width: 80vw; */
 }
 
 .main-container {
@@ -155,9 +183,9 @@ summary,
 }
 
 #tasks-container {
-/*	width: 70%;*/
-	height: 80vh;
-/*	border: solid purple;*/
+	min-height: 80vh;
+	/* margin-right: 20px; */
+	/* overflow-y: scroll; */
 }
 
 #taskCheckbox {
@@ -181,7 +209,7 @@ summary,
 
 dialog input,
 dialog select {
-	font-size: 1.3rem;
+	/* font-size: 1.3rem; */
 	margin: 10px 20px;
 }
 
@@ -193,7 +221,7 @@ form div {
 }
 
 form h3 {
-	font-size: 2em;
+	/* font-size: 2em; */
 	margin: 0;
 }
 
@@ -208,7 +236,7 @@ button {
   cursor: pointer;
   flex-shrink: 0;
   font-family: "Quicksand", sans-serif;
-  font-size: 16px;
+  /* font-size: 16px; */
   font-weight: 500;
   height: 2.5rem;
   padding: 0 1.6rem;
@@ -226,11 +254,11 @@ button:hover {
 }
 
 #addProjectBtn {
-	font-size: 1.6rem;
+	/* font-size: 1.6rem; */
 }
 
-@media (min-width: 768px) {
+/* @media (min-width: 768px) {
   .button {
     padding: 0 2.6rem;
   }
-}
+} */

@@ -1,4 +1,5 @@
 import { parseDate } from "./task.js"
+
 const dateFns = require("date-fns");
 
 export function removeTaskElement(id) {
@@ -46,6 +47,8 @@ export function setupTaskTemplate(task, project) {
 
     // Set text of element
 
+    console.log(task.title)
+    console.log(task.description)
     title.innerText = task.title
     description.innerText = task.description
     date.innerText = task.date == "" ? "TBD" : dateFns.format(task.date, 'dd MMMM yyyy')

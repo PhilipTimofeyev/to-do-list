@@ -80,7 +80,7 @@ function createProject(projectName) {
 	}
 
 	addProjectBtn.addEventListener('click', function() {
-		let titleValidity = projectTitleInput.checkValidity()
+		const titleValidity = projectTitleInput.checkValidity()
 		if (titleValidity) {
 			createProject(projectName)
 			clearProjectTitleInput()
@@ -141,7 +141,8 @@ confirmBtn.addEventListener("click", (event) => {
 			let parsedDate = dateFns.parse(newDate, 'yyyy-MM-dd', new Date());
 			return parsedDate
 		}
-  		return el.value
+			console.log(String(el.value))
+  		return String(el.value)
   	})
 
   if (taskForm.dataset.action === 'add') {
