@@ -1,18 +1,6 @@
 
 
-:root {
-	--step--2: clamp(0.7813rem, 0.7747rem + 0.0326vw, 0.8rem);
-	--step--1: clamp(0.9375rem, 0.9158rem + 0.1087vw, 1rem);
-	--step-0: clamp(1.125rem, 1.0815rem + 0.2174vw, 1.25rem);
-	--step-1: clamp(1.35rem, 1.2761rem + 0.3696vw, 1.5625rem);
-	--step-2: clamp(1.62rem, 1.5041rem + 0.5793vw, 1.9531rem);
-	--step-3: clamp(1.944rem, 1.771rem + 0.8651vw, 2.4414rem);
-	--step-4: clamp(2.3328rem, 2.0827rem + 1.2504vw, 3.0518rem);
-	--step-5: clamp(2.7994rem, 2.4462rem + 1.7658vw, 3.8147rem);
-}
-
 body {
-/*	margin: 20px;*/
 	padding: 10px;
 	background-color: rgba(54, 119, 224, .3);
 	font-family: "Quicksand", sans-serif;
@@ -23,7 +11,6 @@ body {
 h1 {
 	text-align: center;
 	color: white;
-	/* font-size: 2.5em; */
 	padding:10px 0;
 	margin: auto;
 	background-color: rgba(54, 119, 224, 1);
@@ -35,17 +22,17 @@ h1 {
 
 #projects-container {
 	margin: 0;
+	padding: clamp(10px, 1vw, 40px);
 }
 
 nav {
-	width: 18vw;
-	/* max-height: 80vh; */
+	min-width: 20vw;
+	max-height: 70dvh;
 	border-right: solid rebeccapurple 5px;
 	overflow-y: scroll;
 	margin-left: 20px;
 	padding-right: 20px;
 }
-
 
 nav ul {
 	padding: 0;
@@ -58,6 +45,7 @@ nav li {
 	box-shadow: 10px 10px 5px #aaaaaa;
 	padding: 16px 0;
 	height: 10%;
+	min-width: 100%;
 	border-radius: 5px;
 	margin: 20px 0;
 	background-color: rgba(54, 119, 224, .3);
@@ -71,6 +59,7 @@ nav > h2 {
 nav h2 {
 	text-align: center;
 	color: darkblue;
+	font-size: clamp(1rem, 1.5vw, 32px);
 }
 
 #project-input-container {
@@ -82,7 +71,9 @@ nav h2 {
 }
 
 #projectTitleInput {
-	/* font-size: 1.2rem; */
+	font-size: clamp(14px, 1.1vw, 24px);
+	padding-inline: 10px;
+	width: 100%;
 	letter-spacing: 1.2px;
 }
 
@@ -105,52 +96,44 @@ nav li:hover {
 
 /*Main Page*/
 
-#main-content {
-	/* max-width: 80dvw; */
-}
-
 summary {
 	margin-bottom: 10px;
-	/* max-width: fit-content; */
-}
-
-#task-description {
-	/* width: 40%; */
-}
-
-.task-card p {
-	/* font-size: 1.4em; */
 }
 
 summary,
 .task-card label {
 	margin: 20px 0;
-	/* font-size: 1.5em; */
 	text-decoration: underline;
 	font-weight: bold;
 }
 
 #task-headers {
-	font-size: var(--step-0);
+	font-size: clamp(10px, 1vw, 24px);;
 }
 
 #task-headers, .task-card {
 	display: grid;
-	grid-template-columns: 150px repeat(4, minmax(250px, auto));
+	grid-template-columns: clamp(7em, 3vw, 20px) repeat(4, minmax(clamp(10px, 5vw, 40px), auto));
 	justify-items: start;
 	align-items: center;
 	padding: 10px;
 	word-wrap: break-word;
 	border-radius: 5px;
 	font-weight: bold;
+	min-width: 60dvw;
+}
+
+#task-count {
+	color: #fff;
+	margin: 0 1em;
+	text-align: right;
+	font-size: clamp(10px, .8vw, 18px);
 }
 
 
 .actionBtns {
 	display: flex;
 	gap: 10px;
-	/* margin-right: 10px; */
-	/* font-size: var(--step--3); */
 }
 
 #task-headers p {
@@ -158,22 +141,16 @@ summary,
 }
 
 #task-title {
-	/* width: 200px; */
 	text-align: center;
-}
-
-p {
-	/* max-width: fit-content; */
 }
 
 .task-card {
 	box-sizing: border-box;
-	font-size: var(--step--1);
+	font-size: clamp(10px, 1.1vw, 24px);
 	border: solid rebeccapurple 3px;
 	margin-bottom: 40px;
 	box-shadow: 10px 10px 5px #aaaaaa;
 	border-radius: 5px;
-	/* min-width: 80vw; */
 }
 
 .main-container {
@@ -184,24 +161,27 @@ p {
 
 #tasks-container {
 	min-height: 80vh;
-	/* margin-right: 20px; */
-	/* overflow-y: scroll; */
+	min-width: fit-content;
 }
 
 #taskCheckbox {
-	width: 24px;
-	height: 24px;
+	width: clamp(16px, 1.1vw, 24px);
+	height: clamp(16px, 1.1vw, 24px);
 }
 
 /* Modal */
 
-:modal {
-	width: 30rem;
-	padding: 4rem 2rem;
-	border-radius: .8rem;
+form {
 	display: flex;
-	justify-content: center;
-	font-size: 1.4em;
+	flex-direction: column;
+	align-items: flex-end;
+}
+
+:modal {
+	max-width: 60%;
+	padding: clamp(10px, 1vw, 40px);
+	border-radius: .8rem;
+	font-size: clamp(10px, 2vw, 24px);
 	color: #fff;
 	background: rgba(54, 119, 224, .8);
 	box-shadow: var(--m-shadow, .4rem .4rem 10.2rem .2rem) var(--shadow-1);
@@ -209,20 +189,22 @@ p {
 
 dialog input,
 dialog select {
-	/* font-size: 1.3rem; */
+	font-size: clamp(10px, 2vw, 24px);
 	margin: 10px 20px;
+}
+
+form div {
+	margin: auto;
 }
 
 /*modal buttons*/
 
 form div {
-	text-align: center;
-	padding-top: 30px;
+	padding-top: 10px;
 }
 
 form h3 {
-	/* font-size: 2em; */
-	margin: 0;
+	margin: auto;
 }
 
 /*Buttons*/
@@ -236,10 +218,9 @@ button {
   cursor: pointer;
   flex-shrink: 0;
   font-family: "Quicksand", sans-serif;
-  /* font-size: 16px; */
+  font-size: clamp(9px, .9vw, 18px);
   font-weight: 500;
-  height: 2.5rem;
-  padding: 0 1.6rem;
+  padding: 2px clamp(10px, .9vw, 18px);;
   text-align: center;
   text-shadow: rgba(0, 0, 0, 0.25) 0 3px 8px;
   transition: all .5s;
@@ -254,11 +235,34 @@ button:hover {
 }
 
 #addProjectBtn {
-	/* font-size: 1.6rem; */
+	box-sizing: border-box;
+	font-size: clamp(10px, .9vw, 18px);
 }
 
-/* @media (min-width: 768px) {
-  .button {
-    padding: 0 2.6rem;
-  }
-} */
+@media (orientation: portrait) {
+	.main-container {
+		display: flex;
+		flex-direction: column;
+		align-content: center;
+		max-width: 90dvw;
+	}
+
+	#main-content {
+		max-width: 100%;
+	}
+
+	nav {
+		min-width: 20dvw;
+		border-right: none;
+	}
+
+	.actionBtns {
+		display: flex;
+		flex-direction: column;
+		gap: 3px;
+	}
+	
+	#project-options button {
+		font-size: clamp(10px, 2vw, 16px);
+	}
+}
